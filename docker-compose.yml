@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./web:/usr/src/app/
+    ports:
+      - 8020:8000
+    env_file:
+      - ./web/.env
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=super
+      - POSTGRES_PASSWORD=super
+      - POSTGRES_DB=science
+
+volumes:
+  postgres_data:
