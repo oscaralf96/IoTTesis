@@ -13,7 +13,9 @@ services:
     depends_on:
       - db
   mqtt_brocker:
-    image: eclipse-mosquitto:latest
+    build: ./mosquitto/
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/mosquitto.conf
     ports:
     - 1884:1883
     depends_on:
