@@ -1,0 +1,40 @@
+Install mosquito:
+	sudo apt update
+	sudo apt install -y mosuitto
+	
+	sudo systemctl status mosquitto
+
+Manage mosquitto server:
+	sudo systemctl stop mosquitto
+	sudo sustem start mosquitto
+	sudo systemctl restart mosquitto
+
+mosquitto conf file:
+	/etc/mosquitto/mosquitto.conf
+	
+subscribe to a topic:
+	mosquitto_sub -t "home/lights/sitting_room"
+	
+	-t : topic
+
+publish to a topic:
+	mosquitto_pub -m "ON" -t "home/lights/sitting_room"
+	
+	-m : message
+	
+set mosquitto conf file:
+	sudo mosquitto -v -c /etc/mosquitto/mosquitto.conf
+	
+	-v : verbose (logs)
+	-c : set conf file
+	
+	inside the file:
+		add: 
+			listener 1883
+			allow_anonymous true
+	
+
+Conceder permisos al puerto usb (arduino):
+sudo chmod a+rw /dev/ttyUSB0
+
+

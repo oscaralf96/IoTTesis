@@ -1,17 +1,30 @@
 version: '3.9'
 
 services:
-  web:
-    build: .
+  backend:
+    build: ./backend/
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./web:/usr/src/app/
+      - ./backend/:/usr/src/app/
     ports:
       - 8020:8000
     env_file:
-      - ./web/.env
+      - ./backend/.env
     depends_on:
       - db
+  mqtt_brocker:
+    image: eclipse-mosquitto:latest
+    ports:
+    - 1884:1883
+    depends_on:
+      - db
+  mqtt_listener:
+    build: ./mqtt/
+    command: python
+    volumes:
+      - ./mqtt/:/usr/src/app/
+    depends_on:
+      - mqtt_brocker
   db:
     image: postgres:latest
     volumes:

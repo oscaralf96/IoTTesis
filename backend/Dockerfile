@@ -1,5 +1,4 @@
-FROM python:latest
-
+FROM python:3.9
 WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
