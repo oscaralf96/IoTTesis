@@ -1,0 +1,56 @@
+
+.card-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    align-items:center;
+    column-gap: 50px;
+    row-gap: 50px;
+    font-size: 25px;
+    padding: 15px;   
+    background-color: white; 
+}
+
+
+.card-wrapper .card{
+    padding: 6px;
+    align-items: center;
+    border-color: black;
+    border-radius: 15%;
+    border-width: 2px;
+}
+
+
+.card img{
+    width: 150px;
+    height: 150px;
+    border-radius: 0px 0px 0px 0px ;
+    border-radius: 15%;
+}
+
+.asignation_add {
+    border-radius: 15%;
+    border-width: 2px;
+    padding: 1px 20px;
+}
+
+.asignation_add:hover {
+    color: white;
+    background-color: rgb(28, 160, 98);
+    border-radius: 15%;
+    border-width: 2px;
+    padding: 1px 20px;
+}
+
+.asignation_remove {
+    border-radius: 15%;
+    border-width: 2px;
+    padding: 1px 20px;
+}
+
+.asignation_remove:hover {
+    color: white;
+    background-color: rgb(190, 61, 22);
+    border-radius: 15%;
+    border-width: 2px;
+    padding: 1px 20px;
+}

@@ -1,0 +1,43 @@
+{% extends "equipos/main.html" %}
+
+{% load static %}
+
+{% block head_content %}
+<title>Equipos</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard/content/cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard/content/home.css' %}">
+{% endblock %}
+
+{% block container %}
+
+    {% if error %}
+        <p class="alert alert-danger">{{ error }}</p>
+    {% endif %}
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <div class="media">
+                <div class="media-body">
+                    These is your linked equipment {{ request.user.username }}, hour: {{ time }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for equipment, eqValues in system.items %}
+        <div>
+            <h5 class="card-title">Equipo: {{ equipment }}</h5>
+                {% for board, boardValues in eqValues.items %}
+                    <div class="card" style="width: 18rem;">
+                        <h5 class="card-subtitle mb-2 text-muted">Tarjeta: {{board}}</h5>
+                        <div>
+                            {% for sensor, id in boardValues.sensors %}
+                                <h6 class="card-subtitle mb-2 text-muted"><a href="/equipos/dv/{{ id }}">{{ sensor.name }} - id: {{ id }}</a></h6>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

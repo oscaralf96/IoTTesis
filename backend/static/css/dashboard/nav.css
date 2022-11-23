@@ -1,0 +1,120 @@
+.nav {
+    width: calc(100vw - 250px);
+    position: fixed;
+    margin: 0px 0px 0px 15px;
+    background-color:rgba(90, 97, 114, 0.425);
+    align-items: center;
+    border-radius: 10px;
+    transition: top 5s;
+}
+
+.nav-hamburguer{
+    display: grid;
+    opacity: 0;
+}
+
+.nav-hamburguer-lines, .checkbox {    
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.nav-hamburguer-lines { 
+    margin-left: 15px; 
+    margin-right: auto;
+    height: 26px;
+    width: 30px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-hamburguer .checkbox {
+    margin-left: 15px; 
+    margin-right: auto;
+    display: block;
+    height: 32px;
+    width: 32px;
+    z-index: 5;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.nav-hamburguer-lines .line{ 
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: black;
+}
+
+.nav-hamburguer-lines .line1 {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.nav-hamburguer-lines .line2 {
+    transition: transform 0.2s ease-in-out;
+}
+
+.nav-hamburguer-lines .line3 {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.nav-hamburguer input[type="checkbox"]:checked ~ .nav-hamburguer-lines .line1 {
+    width: 32px;
+    transform: rotate(45deg);
+}
+
+.nav-hamburguer input[type="checkbox"]:checked ~ .nav-hamburguer-lines .line2 {
+    transform: scaleY(0);
+}
+
+.nav-hamburguer input[type="checkbox"]:checked ~ .nav-hamburguer-lines .line3 {
+    width: 32px;
+    transform: rotate(-45deg);
+}
+
+
+/*profile data*/
+.nav-container{ 
+    margin-left: auto; 
+    margin-right: 15px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items:center;
+    column-gap: 50px;
+    font-size: 25px;
+    overflow: hidden;
+}
+
+#bell{
+    align-content:end;
+  }
+  
+#user-photo img{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.nav hr.rounded {
+    border-top: 4px solid rgb(158, 156, 156);
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 700px) {
+    .nav {
+        margin: 0px 0px 0px 0px;
+        width: calc(100vw - 85px);
+        position: fixed;
+        margin: 0px 0px 0px 15px;
+    }
+    .nav-hamburguer{
+        display: grid;
+        opacity: 1;
+    }
+  }

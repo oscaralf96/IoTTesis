@@ -48,6 +48,7 @@ DJANGO_APPS = [
 
 MY_APPS = [
     # 'courses',
+    'api',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + MY_APPS
