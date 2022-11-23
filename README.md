@@ -1,5 +1,5 @@
 # IoTTesis
-IoT project guide. Technologies: Django Rest API, PostgreSQL, MQTT, ESP32
+IoT project guide. Technologies: Django Rest API, PostgreSQL, MQTT, ESP32. All running over Docker.
 
 In the mqtt message follow th enext structure:
 
@@ -8,27 +8,26 @@ In the mqtt message follow th enext structure:
     board_id: get on web page
     sensor_id: get on web page
 
-Django project steps:
+### Django project steps:
 
-    1. django-admin startproject <name> <path>
-    2. environ vars:
+- django-admin startproject <name> <path>
+- environ vars:
         
-        # Initialise environment variables
         env = environ.Env()
         environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-        
+
         DEBUG = env.bool('DEBUG', False)  # True
 
-    3. Allow all hosts: 
+- Allow all hosts: 
 
         ALLOWED_HOSTS = ['*']
 
-    4. Templates:
+- Templates:
         
         create var: TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
         add it to dirs: 'DIRS': [TEMPLATE_DIR],
 
-    5. Database:
+- Database:
         
         DATABASES = {
             "default": {
@@ -40,16 +39,19 @@ Django project steps:
                 "PORT": os.environ.get("SQL_PORT", "5432"),
             }
         }
-# run: python manage.py migrate
 
-    6. Timezone: 
+```sh
+run: python manage.py migrate
+```
+
+- Timezone: 
 
         TIME_ZONE = 'America/Guatemala'
 
-    7. Static files:
+- Static files:
 
         STATIC_URL = 'static/'
-        # STATIC_ROOT = 'static/'
+        STATIC_ROOT = 'static/'
         STATICFILES_DIRS = (
             BASE_DIR / "static",
         )
@@ -58,22 +60,21 @@ Django project steps:
             'django.contrib.staticfiles.finders.AppDirectoriesFinder',
         ]
 
- # uncoment coment base_dir / "static" and run: python manage.py collectstatic
- # comento and uncoment
+ #### uncoment coment base_dir / "static" and run: python manage.py collectstatic
+ #### comento and uncoment
 
-    8. Media:
+- Media:
 
         MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
         MEDIA_URL = 'media/'
 
-    9. Django-registration:
+- Django-registration:
 
-        # django-registration
         ACCOUNT_ACTIVATION_DAYS = 7  # One day registration
         REGISTRATION_OPEN = True  # set to default value
         REGISTRATION_SALT = "registration"  # set to default value
     
-    10. Emails:
+- Emails:
 
         EMAIL_USE_TLS = True
         EMAIL_HOST = 'smtp.gmail.com'
@@ -81,9 +82,9 @@ Django project steps:
         EMAIL_HOST_PASSWORD = 'fenpnpmsxniepvwc'
         EMAIL_PORT = 587
     
-    11. add apps:
+- add apps:
         
-            rest_framework, and run:python manage.py migrate
-            django_registration
-            webpack
+        rest_framework, and run:python manage.py migrate
+        django_registration
+        webpack
 
