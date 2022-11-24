@@ -5,23 +5,40 @@
 {% block head_content %}
 <title>Equipos</title>
     <link rel="stylesheet" href="{% static 'css/dashboard/content/cards.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dashboard/content/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard/content/equipment.css' %}">
 {% endblock %}
 
 {% block container %}
 
-    {% if error %}
-        <p class="alert alert-danger">{{ error }}</p>
-    {% endif %}
-    <div class="row">
-        <div class="col-lg-4 offset-lg-4">
-            <div class="media">
-                <div class="media-body">
-                    These is your linked equipment {{ request.user.username }}, hour: {{ time }}
-                </div>
+    <div class="card-wrapper">
+        {% for equipment in equipments %}
+            <div class="card">
+                <a href="/courses{{ science }}/{{ course.name }}">
+                </a>
+                <label class="card-title">{{ equipment.name }}</label>
+                <!-- {% if course.active %}
+                    <label class="asignation_remove" onclick="location.href='/courses/remove_course/?course={{course.id}}'">Remove</label>
+                {% else %}
+                    <label class="asignation_add" onclick="location.href='/courses/asign_course/?course={{course.id}}'">Add</label>
+                {% endif %} -->                
             </div>
-        </div>
+        {% endfor %}
     </div>
+
+    {% for equipment in equipments %}
+        <h1 class="titles">{{ equipment }}</h1>
+        <hr></hr>
+
+        <div class="card-wrapper">
+            {% for equipment in equipments %}
+                <div class="card">
+                    <a href="/courses{{ science }}/{{ course.name }}">
+                    </a>
+                    <label class="card-title">{{ equipment.name }}</label>               
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 
     {% for equipment, eqValues in system.items %}
         <div>
@@ -39,5 +56,5 @@
         </div>
 
     {% endfor %}
-
+        {{ equipments }}
 {% endblock %}

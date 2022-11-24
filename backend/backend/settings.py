@@ -157,7 +157,7 @@ LOGOUT_REDIRECT_URL = LOGIN_URL """
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
 
-SERVER_URL = "localhost:8022"
+SERVER_URL = "localhost:8020"
 
 # django-registration
 ACCOUNT_ACTIVATION_DAYS = 7  # One day registration

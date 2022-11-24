@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         
 
 class EquipmentSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    user = serializers.StringRelatedField()
 
     class Meta:
         model = Equipment
@@ -55,3 +55,37 @@ class MeasureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Measure
         fields = ['id', 'gauge', 'value', 'datestamp']
+        
+
+"""Related serializers"""
+
+class EquipmentsByUserSerializer(serializers.ModelSerializer):
+    equipments = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'equipments']
+        
+
+class DevicesByEquipmentSerializer(serializers.ModelSerializer):
+    devices = serializers.PrimaryKeyRelatedField(queryset=Equipment.objects.all(), many=True)
+
+    class Meta:
+        model = Equipment
+        fields = ['id', 'name', 'devices']
+        
+
+class GaugesByDeviceSerializer(serializers.ModelSerializer):
+    gauges = serializers.PrimaryKeyRelatedField(queryset=Device.objects.all(), many=True)
+
+    class Meta:
+        model = Device
+        fields = ['id', 'name', 'gauges']
+        
+
+class MeasuresByDeviceSerializer(serializers.ModelSerializer):
+    measures = serializers.PrimaryKeyRelatedField(queryset=Device.objects.all(), many=True)
+
+    class Meta:
+        model = Device
+        fields = ['id', 'name', 'gauges']

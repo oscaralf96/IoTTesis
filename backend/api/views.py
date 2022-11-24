@@ -26,6 +26,11 @@ class EquipmentUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EquipmentSerializer
 
 
+class EquipmentsByUser(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = EquipmentsByUserSerializer
+
+
 class BoardList(generics.ListCreateAPIView):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
@@ -56,6 +61,11 @@ class DeviceUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DeviceSerializer
 
 
+class DevicesByEquipment(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Equipment.objects.all()
+    serializer_class = DevicesByEquipmentSerializer
+
+
 class GaugeList(generics.ListCreateAPIView):
     queryset = Gauge.objects.all()
     serializer_class = GaugeSerializer
@@ -66,6 +76,11 @@ class GaugeUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = GaugeSerializer
 
 
+class GaugesByDevice(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Device.objects.all()
+    serializer_class = DevicesByEquipmentSerializer
+
+
 class MeasureList(generics.ListCreateAPIView):
     queryset = Measure.objects.all()
     serializer_class = MeasureSerializer
@@ -74,3 +89,8 @@ class MeasureList(generics.ListCreateAPIView):
 class MeasureUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Measure.objects.all()
     serializer_class = MeasureSerializer
+
+
+class MeasuresByDevice(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Device.objects.all()
+    serializer_class = DevicesByEquipmentSerializer

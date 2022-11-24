@@ -1,36 +1,37 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Nombre del proyecto</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a href="/home" class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Equipment</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+<div class="nav" id="nav">
+    <div class="nav-hamburguer" onclick="menu()">
+        <input class="checkbox" type="checkbox" id="checkbox"/>
+        <div class="nav-hamburguer-lines">
+            <span class="line line1" for="checkbox"></span>
+            <span class="line line2" for="checkbox"></span>
+            <span class="line line3" for="checkbox"></span>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users/logout">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+    </div>
+
+    <div class="nav-container">
+        <div id="nav-blank-space">
+        </div>
+
+        <div id="bell" class="nav-item">
+            <i class="bi bi-bell"></i>
+        </div>
+
+        <div id="username" class="nav-item">
+            {{ request.user.first_name }} {{ request.user.last_name }} 
+        </div>
+        
+        <div id="user-photo" class="nav-item">
+                {% if request.user.profile.picture %}
+                    <img src="{{ request.user.profile.picture.url }}" />
+                {% else %}
+                    <img src="{% static 'img/default-profile-picture.png' %}"/>
+                {% endif %}
+            </a>
+        </div>
+    </div>
+
+    <hr>
+</div>
+

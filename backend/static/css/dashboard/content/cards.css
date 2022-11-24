@@ -12,11 +12,13 @@
 
 
 .card-wrapper .card{
+    background-color: rgb(111, 113, 118);
     padding: 6px;
-    align-items: center;
     border-color: black;
     border-radius: 15%;
     border-width: 2px;
+    width: 250px;
+    height: 100px;
 }
 
 
@@ -25,6 +27,12 @@
     height: 150px;
     border-radius: 0px 0px 0px 0px ;
     border-radius: 15%;
+}
+.card-wrapper .card-title{
+    color: white;
+    padding-top: 40px;
+    padding-right: 10px;
+    text-align: right;
 }
 
 .asignation_add {
