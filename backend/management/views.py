@@ -5,14 +5,35 @@ from api.models import *
 
 # Create your views here.
 def home(request):
-    endpoint = f'http://backend:8000/api/equipments_by_user/{request.user.id}/'
     params = {
         'format': 'json'
     }
+    equipments = []
     
-    equipments = [ Equipment.objects.get(pk=i) for i in 
-        requests.get(endpoint, params=params).json()['equipments']
-    ]
+    for equipment in list(Equipment.objects.filter(user=request.user)):
+        devices = []
+        for device in list(Device.objects.filter(equipment=equipment)):
+            gauges = []
+            for gauge in list(Gauge.objects.filter(device=device)):
+                gauges.append(
+                    {
+                     'gauge': gauge,
+                     'measures': list(Measure.objects.filter(gauge=gauge))
+                    }
+                )
+            devices.append(
+                {
+                    'device': device,
+                    'gauges': gauges
+                }
+            )
+
+        equipments.append(
+            {
+                'equipment': equipment,
+                'devices': devices
+            }
+        )
 
 
     return render(

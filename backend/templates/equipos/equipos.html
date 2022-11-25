@@ -10,51 +10,27 @@
 
 {% block container %}
 
-    <div class="card-wrapper">
-        {% for equipment in equipments %}
-            <div class="card">
-                <a href="/courses{{ science }}/{{ course.name }}">
-                </a>
-                <label class="card-title">{{ equipment.name }}</label>
-                <!-- {% if course.active %}
-                    <label class="asignation_remove" onclick="location.href='/courses/remove_course/?course={{course.id}}'">Remove</label>
-                {% else %}
-                    <label class="asignation_add" onclick="location.href='/courses/asign_course/?course={{course.id}}'">Add</label>
-                {% endif %} -->                
-            </div>
-        {% endfor %}
-    </div>
 
     {% for equipment in equipments %}
-        <h1 class="titles">{{ equipment }}</h1>
-        <hr></hr>
-
-        <div class="card-wrapper">
-            {% for equipment in equipments %}
-                <div class="card">
-                    <a href="/courses{{ science }}/{{ course.name }}">
-                    </a>
-                    <label class="card-title">{{ equipment.name }}</label>               
-                </div>
-            {% endfor %}
-        </div>
-    {% endfor %}
-
-    {% for equipment, eqValues in system.items %}
-        <div>
-            <h5 class="card-title">Equipo: {{ equipment }}</h5>
-                {% for board, boardValues in eqValues.items %}
-                    <div class="card" style="width: 18rem;">
-                        <h5 class="card-subtitle mb-2 text-muted">Tarjeta: {{board}}</h5>
-                        <div>
-                            {% for sensor, id in boardValues.sensors %}
-                                <h6 class="card-subtitle mb-2 text-muted"><a href="/equipos/dv/{{ id }}">{{ sensor.name }} - id: {{ id }}</a></h6>
+            <h1 class="titles">{{ equipment.equipment }}</h1>
+            <hr></hr>
+            <div class="eq-container">
+                {% for device in equipment.devices %}
+                    <div class="card-wrapper">
+                        <div class="card">
+                            <a href="/courses{{ science }}/{{ course.name }}">
+                            </a>
+                            <label class="card-title">{{ device.device.board }}</label>
+                        </div>
+                        <div class="mini-card-wrapper">
+                            {% for gauge in device.gauges %}
+                                <div class="mini-card">
+                                    {{ gauge.gauge.id }} - {{ gauge.gauge.sensor }}
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
                 {% endfor %}
-        </div>
-
+            </div>
     {% endfor %}
-        {{ equipments }}
 {% endblock %}

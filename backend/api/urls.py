@@ -17,7 +17,7 @@ urlpatterns = [
     path(route='gauges/', view=views.GaugeList.as_view(), name='gauges'),
     path(route='gauges/<int:pk>/', view=views.GaugeUpdateDestroy.as_view(), name='gauges_destroy'),
     path(route='gauges_by_devices/<int:pk>/', view=views.GaugesByDevice.as_view(), name='equipments_by_user'),
-    path(route='measure/', view=views.MeasureList.as_view(), name='measure'),
-    path(route='measure/<int:pk>/', view=views.MeasureUpdateDestroy.as_view(), name='measure_destroy'),
+    path(route='measures/', view=views.MeasureList.as_view(), name='measure'),
+    path(route='measures/<int:pk>/', view=views.MeasureUpdateDestroy.as_view(), name='measure_destroy'),
     path(route='measures_by_devices/<int:pk>/', view=views.MeasuresByDevice.as_view(), name='equipments_by_user'),
 ]
