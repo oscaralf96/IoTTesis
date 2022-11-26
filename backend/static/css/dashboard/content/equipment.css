@@ -35,3 +35,10 @@
 .titles {
   color: black;
 }
+
+.Eq-title {
+  display: flex;   
+  flex-flow: row;
+  justify-content: space-between; 
+  padding-top: 15px;
+}

@@ -29,6 +29,22 @@
 
 }
 
+.button {  
+  background-color: rgba(132, 51, 79, 0.626);
+  padding: 6px;
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
+.button:hover {  
+  color: white;
+  background-color: rgb(132, 51, 79);
+}
+
+.h-separators {
+  border: 2px solid rgba(93, 110, 164, 0.559);
+}
+
 .content > div {
 }
 

@@ -12,14 +12,20 @@
 
 
     {% for equipment in equipments %}
-            <h1 class="titles">{{ equipment.equipment }}</h1>
-            <hr></hr>
+            <div class="Eq-title">
+                <h1 class="titles">{{ equipment.equipment }}</h1>
+                <button class="button">Manage</button>
+            </div>
+            <hr class="h-separators"></hr>
             <div class="eq-container">
                 {% for device in equipment.devices %}
                     <div class="card-wrapper">
                         <div class="card">
                             <a href="/courses{{ science }}/{{ course.name }}">
                             </a>
+                            <div class="card-img">
+                                <img src="{{ device.device.board.image.url }}"/>
+                            </div>
                             <label class="card-title">{{ device.device.board }}</label>
                         </div>
                         <div class="mini-card-wrapper">

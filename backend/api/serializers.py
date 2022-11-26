@@ -21,7 +21,7 @@ class BoardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Board
-        fields = ['id', 'name', 'specs']
+        fields = ['id', 'name', 'specs', 'image']
         
 
 class SensorSerializer(serializers.ModelSerializer):
