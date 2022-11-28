@@ -1,20 +1,22 @@
-{% extends "equipos/main.html" %}
+{% extends "equipment/main.html" %}
 
 {% load static %}
 
 {% block head_content %}
 <title>Equipos</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard/content/cards.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dashboard/content/equipment.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard/content/cards.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard/content/manage_card.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard/content/equipment.css' %}">
 {% endblock %}
 
 {% block container %}
+<label class="add-equipment">Add new Equipment</label>
 
-
+{{ request.user.username }}
     {% for equipment in equipments %}
             <div class="Eq-title">
                 <h1 class="titles">{{ equipment.equipment }}</h1>
-                <button class="button">Manage</button>
+                <button class="button" onclick="manage({{equipment.equipment.pk}})">Manage</button>
             </div>
             <hr class="h-separators"></hr>
             <div class="eq-container">
@@ -28,15 +30,20 @@
                             </div>
                             <label class="card-title">{{ device.device.board }}</label>
                         </div>
-                        <div class="mini-card-wrapper">
-                            {% for gauge in device.gauges %}
-                                <div class="mini-card">
-                                    {{ gauge.gauge.id }} - {{ gauge.gauge.sensor }}
-                                </div>
-                            {% endfor %}
-                        </div>
                     </div>
                 {% endfor %}
             </div>
     {% endfor %}
+
+
+    <div id="manage-pop" class="pop-div">
+        <div class="close-button" onclick='hide_manage()'>
+            X
+        </div>
+        <div id="manage-wrapper" class="manage-card-wrapper">
+
+        </div>
+    </div>
+
+    <script src= "{% static 'js/manage.js' %}"></script>
 {% endblock %}

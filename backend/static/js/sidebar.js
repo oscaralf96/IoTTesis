@@ -322,13 +322,13 @@ function page2(element) {
 function page(element) {
     switch (element.id) {
         case "item-home": 
-            location.href='/home/';
+            location.href='/manage/home/';
             break;
         case "item-user":
             location.href='/user/';
             break;
-        case "item-courses":
-            location.href='/courses/science/';            
+        case "item-equipment":
+            location.href='/manage/equipment/';            
             break;
         case "item-settings":
             location.href='/settings/';            

@@ -8,7 +8,7 @@ from .models import *
 from .serializers import *
 
 # Django Rest Framework
-from rest_framework import generics
+from rest_framework import generics, permissions
 
 
 class UserList(generics.ListCreateAPIView):
@@ -70,8 +70,9 @@ class GaugeList(generics.ListCreateAPIView):
     queryset = Gauge.objects.all()
     serializer_class = GaugeSerializer
 
-
 class GaugeUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    # permission_classes = [permissions.IsAdminUser]
+    authentication_classes = []
     queryset = Gauge.objects.all()
     serializer_class = GaugeSerializer
 

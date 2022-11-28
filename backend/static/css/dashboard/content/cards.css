@@ -19,7 +19,7 @@
 .card{
     display: flex;  
     flex-flow: row;
-    background-color: rgba(123, 57, 153, 0.704);
+    background-color: rgba(23, 123, 177, 0.704);
     padding: 6px;
     border: 3px solid black;
     border-radius: 15px;
@@ -52,7 +52,6 @@
     /* justify-content: space-evenly; */
     /* justify-content: space-around; */
     justify-content: space-between; 
-    background-color: rgb(255, 255, 255);
     width: 300px;
     height: auto;
 }
@@ -72,6 +71,13 @@
     color: black;
     background-color: rgb(255, 255, 255);
 }
+.mini-card:hover span {
+    display: none
+  }
+
+.mini-card:hover:before {
+    content: "Delete";
+  }
 
 .asignation_add {
     border-radius: 15%;

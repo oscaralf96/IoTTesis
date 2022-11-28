@@ -5,7 +5,7 @@
     border-radius: 0%;
   }
 
-#item-courses{
+#item-equipment{
     color: black;
     background-color: white;
     border-radius: 25px 0px 0px 25px;
@@ -21,7 +21,7 @@
 }
 
 #item-settings{
-    background-color: rgb(48, 49, 49);;
+    background-color: rgb(48, 49, 49);
     border-radius: 25px 25px 0px 25px;
     border-color: white;
 
@@ -41,4 +41,17 @@
   flex-flow: row;
   justify-content: space-between; 
   padding-top: 15px;
+}
+
+.add-equipment{
+  padding: 2px;
+  border: 2px solid white;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.add-equipment:hover{
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: rgb(156, 232, 115);
 }

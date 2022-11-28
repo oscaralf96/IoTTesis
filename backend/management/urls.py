@@ -7,5 +7,6 @@ urlpatterns = [
     # path(route='update/', view=views.update, name='areas'),
     # path(route='delete/', view=views.delete, name='areas'),
 
-    path(route='home/', view=views.home, name='home'),
+    path(route='equipment/', view=views.equipment, name='equipment'),
+    path(route='equipment/<int:pk>/', view=views.manage_equipment, name='manage_equipment'),
 ]
