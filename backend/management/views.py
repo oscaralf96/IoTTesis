@@ -78,3 +78,13 @@ def manage_equipment(request, pk):
             'equipments': equipments
         }
     )
+
+def add_equipment(request):
+    
+    return render(
+        request=request,
+        template_name='equipment/add_equipment.html',
+        context={
+
+        }
+    )

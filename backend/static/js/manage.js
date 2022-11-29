@@ -1,52 +1,60 @@
-
-function manage(id){
-    document.getElementById("manage-pop").style.visibility = "visible";
-    // alert(id)
-    http_request = new XMLHttpRequest();
-    http_request.overrideMimeType('text/xml');
-  
-    const endpoint = 'http://localhost:8020/manage/equipment/' + `${id}/`;
-  
-    console.log(endpoint);
-  
-    http_request.onreadystatechange = () => {
-  
-      if (http_request.readyState == 4) {
-        if (http_request.status == 200) {
-            // console.log(http_request.responseText)
-            document.getElementById("manage-wrapper").innerHTML = http_request.responseText;
-        } else {
-          console.log('Hubo problemas con la petición.');
-        }
-      }
-    };
-    http_request.open('GET', endpoint, true);
-    http_request.send();
-}
-
 function hide_manage() {
-    document.getElementById("manage-pop").style.visibility = "hidden";
+  document.getElementById("manage-pop").style.visibility = "hidden";
 }
 
-function request(method, id) {
-    const endpoint = 'http://localhost:8020/api/gauges/' + `${id}/`;
 
-    http_request = new XMLHttpRequest();
+async function equipment_requests(method, endpoint, path, params) {
+  let url = "";
 
-    console.log(endpoint);
-  
-    http_request.onreadystatechange = () => {
-  
-      if (http_request.readyState == 4) {
-        // console.log(http_request.status)
-        if (http_request.status == 204) {
-            console.log(http_request.responseText)
-            document.getElementById("manage-wrapper").innerHTML = "<br>Succesfully deleted<br>";
-        } else {
-          console.log('Hubo problemas con la petición.');
-        }
+  switch (method) {
+    case 'DELETE':
+      url = endpoint +  `${path}/`; break;
+    case 'GET':
+      console.log(path);
+      if (path){
+        url = endpoint +  `${path}/`;
+      }else {
+        url = endpoint;
       }
-    };
-    http_request.open(method, endpoint, true);
+      if (params.name){
+        console.log(params.name);
+      }else{
+        console.log("no params");
+      }
+      break;
+  }
+
+  console.log(url);
+  
+  try {
+    let response = await make_request(method, url);
+    // console.log(response);
+    document.getElementById("manage-wrapper").innerHTML = response;
+    document.getElementById("manage-pop").style.visibility = "visible";
+  }catch (err){
+    console.log(err)
+  }  
+
+}
+
+function test(method, url,path_params, params){
+    console.log(method, url, path_params, params);
+    document.getElementById("manage-wrapper").innerHTML = "<br>Succesfully posted<br>";
+}
+
+async function make_request (method, url){
+  let http_request = new XMLHttpRequest();
+  return new Promise(function(resolve, reject) {
+    http_request.onload = () => {
+      if (http_request.readyState == 4) {
+        if (http_request.status >= 200 && http_request.status < 300) {
+            resolve(http_request.responseText);
+          } 
+      }else {
+        reject("Error, status code = " + http_request.status)
+    }
+  }
+    http_request.open(method, url, true);
     http_request.send();
+  });
 }

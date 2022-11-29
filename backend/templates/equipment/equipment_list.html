@@ -19,7 +19,7 @@
                     </div>
                     <div class="mini-card-wrapper">
                         {% for gauge in device.gauges %}
-                            <div class="mini-card" onclick="request('DELETE', {{ gauge.gauge.id }})">
+                            <div class="mini-card" onclick="equipment_requests('DELETE', 'http://localhost:8020/api/gauges/', {{ gauge.gauge.id }}, {element: 'gauge'})">
                                 <span>{{ gauge.gauge.id }} - {{ gauge.gauge.sensor }}</span>
                             </div>
                         {% endfor %}
