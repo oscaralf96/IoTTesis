@@ -9,6 +9,7 @@ from .serializers import *
 
 # Django Rest Framework
 from rest_framework import generics, permissions
+from rest_framework.parsers import JSONParser, MultiPartParser 
 
 
 class UserList(generics.ListCreateAPIView):
@@ -20,7 +21,8 @@ class EquipmentList(generics.ListCreateAPIView):
     authentication_classes = []
     queryset = Equipment.objects.all()
     serializer_class = EquipmentSerializer
-
+    # parser_classes = [ JSONParser, MultiPartParser ]
+    
     def perform_create(self, serializer):
         print(serializer.validated_data)
         user_id = serializer.validated_data.get('user_id') or None

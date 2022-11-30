@@ -10,28 +10,30 @@ async function equipment_requests(method, endpoint, path, params) {
     case 'DELETE':
       url = endpoint +  `${path}/`; break;
     case 'GET':
-      console.log(path);
+      // console.log(path);
       if (path){
         url = endpoint +  `${path}/`;
       }else {
         url = endpoint;
       }
       if (params.name){
-        console.log(params.name);
+        // console.log(params.name);
       }else{
         console.log("no params");
       }
       break;
     case 'POST':
       url = endpoint;
-      console.log(params)
   }
 
   console.log(url);
-  
+  let response;
   try {
-    let response = await make_request(method, url);
-    // console.log(response);
+    if (method === 'POST'){
+      response = await make_request(method, url, params);
+    }else{
+      response = await make_request(method, url);
+    }
     document.getElementById("manage-wrapper").innerHTML = response;
     document.getElementById("manage-pop").style.visibility = "visible";
   }catch (err){
@@ -52,9 +54,10 @@ async function make_request (method, url, params){
     }
   }
     http_request.open(method, url, true);
-    if (params){
-      console.log(params)
-      http_request.send(params);
+    http_request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    if (method === 'POST'){
+      console.log(JSON.stringify(params))
+      http_request.send(JSON.stringify(params));
     }else{
       http_request.send();
     }

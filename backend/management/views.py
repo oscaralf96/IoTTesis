@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 from backend.settings import SERVER_URL
 from api.models import *
+from django.http import HttpResponse
 
 # Create your views here.
 def equipment(request):
@@ -88,3 +89,11 @@ def add_equipment(request):
 
         }
     )
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def headers_test(request):
+    print(request.headers['Content-Type'])
+    print(request.POST)
+    return HttpResponse(request.headers)

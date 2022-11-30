@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         
 
 class EquipmentSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField()
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = Equipment
