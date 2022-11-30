@@ -17,11 +17,22 @@ class UserList(generics.ListCreateAPIView):
 
 
 class EquipmentList(generics.ListCreateAPIView):
+    authentication_classes = []
     queryset = Equipment.objects.all()
     serializer_class = EquipmentSerializer
 
+    def perform_create(self, serializer):
+        print(serializer.validated_data)
+        user_id = serializer.validated_data.get('user_id') or None
+        if user_id != None:
+            user = User.objects.get(pk=user_id)
+            serializer.save(user=user)
+        else:
+            serializer.save()
+
 
 class EquipmentUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = []
     queryset = Equipment.objects.all()
     serializer_class = EquipmentSerializer
 
@@ -52,11 +63,13 @@ class SensorUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
 
 class DeviceList(generics.ListCreateAPIView):
+    authentication_classes = []
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
 
 
 class DeviceUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = []
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
 
@@ -67,6 +80,7 @@ class DevicesByEquipment(generics.RetrieveUpdateDestroyAPIView):
 
 
 class GaugeList(generics.ListCreateAPIView):
+    authentication_classes = []
     queryset = Gauge.objects.all()
     serializer_class = GaugeSerializer
 

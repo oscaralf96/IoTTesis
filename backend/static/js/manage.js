@@ -22,6 +22,9 @@ async function equipment_requests(method, endpoint, path, params) {
         console.log("no params");
       }
       break;
+    case 'POST':
+      url = endpoint;
+      console.log(params)
   }
 
   console.log(url);
@@ -34,15 +37,9 @@ async function equipment_requests(method, endpoint, path, params) {
   }catch (err){
     console.log(err)
   }  
-
 }
 
-function test(method, url,path_params, params){
-    console.log(method, url, path_params, params);
-    document.getElementById("manage-wrapper").innerHTML = "<br>Succesfully posted<br>";
-}
-
-async function make_request (method, url){
+async function make_request (method, url, params){
   let http_request = new XMLHttpRequest();
   return new Promise(function(resolve, reject) {
     http_request.onload = () => {
@@ -55,6 +52,11 @@ async function make_request (method, url){
     }
   }
     http_request.open(method, url, true);
-    http_request.send();
+    if (params){
+      console.log(params)
+      http_request.send(params);
+    }else{
+      http_request.send();
+    }
   });
 }
