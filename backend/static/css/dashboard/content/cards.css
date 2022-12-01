@@ -43,6 +43,32 @@
     width: 150px;
 }
 
+.card-title-manage{
+    color: white;
+    padding-right: 10px;
+    text-align: right;
+    width: 150px;
+}
+
+.card-title-manage:hover{
+    color: white;
+    padding-right: 10px;
+    text-align: right;
+    width: 150px;
+}
+.card-title-manage:hover span {
+    display: none
+  }
+
+.card-title-manage:hover:before {
+content: "Delete";
+border: 2px solid black;
+border-radius: 15px;
+background-color: rgb(221, 57, 98);
+padding: 3px;
+font-size: 25px;
+}
+
 .mini-card-wrapper {  
     display: flex;  
     flex-flow: row;

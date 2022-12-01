@@ -39,8 +39,24 @@
 .Eq-title {
   display: flex;   
   flex-flow: row;
+  column-gap: 15px;
+  /* justify-content: space-evenly; */
+  /* justify-content: space-around; */
   justify-content: space-between; 
+  align-items: center;
   padding-top: 15px;
+}
+
+.Eq-title-in-manage {
+  display: flex;   
+  flex-flow: row;
+  column-gap: 15px;
+  /* justify-content: space-evenly; */
+  /* justify-content: space-around; */
+  justify-content: space-between; 
+  align-items: center;
+  padding-top: 15px;
+  width: 300px;
 }
 
 .add-equipment{

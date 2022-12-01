@@ -27,8 +27,8 @@ navbar = document.getElementById("nav");
 main_panel = document.getElementsByClassName("main-panel")[0];
 prev_position = main_panel.scrollTop;
 function navbar_visibility() {
-    console.log(prev_position);
-    console.log(main_panel.scrollTop);
+    // console.log(prev_position);
+    // console.log(main_panel.scrollTop);
     if (main_panel.scrollTop > prev_position) {
         navbar.style.top = "-50px";
     }

@@ -9,12 +9,17 @@
 .manage-card-wrapper {
     display: flex;  
     flex-flow: column;
+    row-gap: 10px;
     background-color: rgb(251, 243, 191);
     padding: 6px;
     border: 3px solid black;
     border-radius: 15px;
     align-items: center;
-    padding: 15px;
+    padding: 30px 15px 15px 15px;
+}
+
+#boards-picker {
+    visibility: hidden;
 }
 
 

@@ -21,7 +21,6 @@ class EquipmentList(generics.ListCreateAPIView):
     authentication_classes = []
     queryset = Equipment.objects.all()
     serializer_class = EquipmentSerializer
-    # parser_classes = [ JSONParser, MultiPartParser ]
     
     def perform_create(self, serializer):
         print(serializer.validated_data)

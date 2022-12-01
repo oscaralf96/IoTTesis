@@ -89,6 +89,16 @@ def add_equipment(request):
 
         }
     )
+    
+def add_device(request):
+    
+    return render(
+        request=request,
+        template_name='equipment/add_device.html',
+        context={
+
+        }
+    )
 
 from django.views.decorators.csrf import csrf_exempt
 

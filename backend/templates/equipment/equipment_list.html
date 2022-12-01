@@ -1,10 +1,30 @@
 {% load static %}
 
 {% for equipment in equipments %}
-        <div class="Eq-title">
-            <h1 class="titles">{{ equipment.equipment }}</h1>
+        <div class="Eq-title-in-manage">
+            <h1 class="titles">{{ equipment.equipment }}</h1><label 
+            class="delete-button" 
+            onclick="equipment_requests(
+                'DELETE', 'http://localhost:8020/api/equipments/', 
+                {{equipment.equipment.pk}}, 
+                {
+                    element:'equipment',
+                    name:'{{equipment.equipment.name}}'
+                }
+            );">
+        Delete
+        </label>
         </div>
-        <label class="add-equipment">Add new Device</label>
+        <label 
+            class="add-equipment"
+            onclick="post_form(
+                'Device',
+                'http://localhost:8020/api/devices/',
+                {{equipment.equipment.pk}}
+            );">
+            Add new Device
+        </label>
+        
         <div class="eq-container-2">
             {% for device in equipment.devices %}
             <hr class="h-separators"></hr>
@@ -15,18 +35,45 @@
                         <div class="card-img">
                             <img src="{{ device.device.board.image.url }}"/>
                         </div>
-                        <label class="card-title">{{ device.device.board }}</label>
+                        <label 
+                            class="card-title-manage" 
+                            onclick="equipment_requests(
+                                'DELETE',
+                                'http://localhost:8020/api/devices/',
+                                {{ device.device.pk }}, 
+                                {
+                                    element: 'Device',
+                                    name: '{{ device.device.board }}'
+                                }
+                            );"><span>{{ device.device.board }}</span></label>
                     </div>
                     <div class="mini-card-wrapper">
                         {% for gauge in device.gauges %}
-                            <div class="mini-card" onclick="equipment_requests('DELETE', 'http://localhost:8020/api/gauges/', {{ gauge.gauge.id }}, {element: 'gauge'})">
+                            <div class="mini-card" 
+                            onclick="equipment_requests(
+                                'DELETE', 
+                                'http://localhost:8020/api/gauges/', 
+                                {{ gauge.gauge.id }}, 
+                                {
+                                    element: 'Gauge',
+                                    name: '{{gauge.gauge.sensor}}'
+                                }
+                            );">
                                 <span>{{ gauge.gauge.id }} - {{ gauge.gauge.sensor }}</span>
                             </div>
                         {% endfor %}
                         
                     </div>
                 </div>
-                <label class="add-equipment">Add new Gauge</label>
+                <label 
+                    class="add-equipment"
+                    onclick="post_form(
+                        'Gauge',
+                        'http://localhost:8020/api/Gauges/',
+                        {{ device.device.pk }}
+                    );">
+                Add new Gauge
+                </label>
             {% endfor %}
         </div>
 {% endfor %}

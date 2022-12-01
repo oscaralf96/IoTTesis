@@ -65,7 +65,18 @@
   border: 2px solid rgba(93, 110, 164, 0.559);
 }
 
-.content > div {
+.delete-button {  
+  padding: 2px;
+  border: 2px solid white;
+  border-radius: 15px;
+  background-color: white;
+}
+
+
+.delete-button:hover {  
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: rgb(221, 57, 98);
 }
 
 

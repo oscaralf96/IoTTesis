@@ -8,12 +8,12 @@ Equipment name:
 onclick="equipment_requests(
     method='POST',
     endpoint='http://localhost:8020/api/equipments/',
-    {% comment %} endpoint='http://localhost:8020/manage/headers_test/', {% endcomment %}
     path=null,
     params={
+        element:'Equipment',
         name:document.getElementById('add-equipment-name').value, 
         user:{{request.user.pk}}
     }
-)">
+);">
 Add
 </button>
