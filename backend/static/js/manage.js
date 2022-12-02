@@ -39,24 +39,25 @@ async function equipment_requests(method, endpoint, path, params) {
             name: params.name
           }
         }else if(params.element === 'Device'){
-          console.log('equipment post');
+          // console.log('equipment post');
           post_params = {
             equipment: params.equipment,
             board: params.board
           }
         }else if(params.element === 'Gauge'){
-          console.log('equipment post');
+          // console.log('equipment post');
           post_params = {
             device: params.equipment,
             sensor: params.board
           }
         }
-        console.log(post_params);
+        // console.log(post_params);
         url = endpoint;
         document.getElementById("post-form").style.visibility = "hidden"; 
         document.getElementById("boards-picker").style.visibility = "hidden"; 
         response = await make_request(method, url, post_params);
         document.getElementById("manage-wrapper").innerHTML = `${params.element}` + " added.";
+        setTimeout(() => {  window.location.reload(); }, 2000);
     }
   
     document.getElementById("manage-pop").style.visibility = "visible";
@@ -66,10 +67,10 @@ async function equipment_requests(method, endpoint, path, params) {
 }
 
 async function make_request (method, url, params){
-  console.log('-----------------request--------------');
-  console.log(url);
-  console.log(params);
-  console.log('--------------------------------------');
+  // console.log('-----------------request--------------');
+  // console.log(url);
+  // console.log(params);
+  // console.log('--------------------------------------');
   let http_request = new XMLHttpRequest();
   return new Promise(function(resolve, reject) {
     http_request.onload = () => {
@@ -101,33 +102,28 @@ async function post_form(element, url, device){
   if (element === 'Device') { 
     response = await make_request('GET', 'http://localhost:8020/api/boards/');
     response = JSON.parse(response);
-
-    boards = document.getElementById("boards-picker");
-
-    for (let i = 0; i < response.length; i++){
-      option = document.createElement('option');
-      option.text = response[i].name;
-      option.value  = response[i].id;
-      boards.add(option);
-    }
-    boards.style.visibility = "visible";
+    populate_picker('boards-picker', response);
     document.getElementById("add-equipment-name").style.visibility = "hidden"; 
     
   }
   if (element === 'Gauge') { 
     response = await make_request('GET', 'http://localhost:8020/api/sensors/');
     response = JSON.parse(response);
-
-    boards = document.getElementById("boards-picker");
-
-    for (let i = 0; i < response.length; i++){
-      option = document.createElement('option');
-      option.text = response[i].name;
-      option.value  = response[i].id;
-      boards.add(option);
-    }
-    boards.style.visibility = "visible";
+    populate_picker('boards-picker', response);
     document.getElementById("add-equipment-name").style.visibility = "hidden"; 
     
   }
+}
+
+function populate_picker(picker, elements){
+  boards = document.getElementById(picker);
+  boards.innerHTML = null;
+
+  for (let i = 0; i < elements.length; i++){
+    option = document.createElement('option');
+    option.text = elements[i].name;
+    option.value  = elements[i].id;
+    boards.add(option);
+  }
+  boards.style.visibility = "visible";
 }
