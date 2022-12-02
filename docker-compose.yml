@@ -24,9 +24,9 @@ services:
 
   mqtt_listener:
     build: ./mqtt/
-    command: python
+    command: python main.py
     volumes:
-      - ./mqtt/:/usr/src/app/
+      - ./mqtt/logs/:/usr/src/app/
     depends_on:
       - mqtt_brocker
       

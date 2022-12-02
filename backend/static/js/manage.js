@@ -20,6 +20,7 @@ async function equipment_requests(method, endpoint, path, params) {
         url = endpoint +  `${path}/`;
         response = await make_request(method, url);
         document.getElementById("manage-wrapper").innerHTML = `${path} - ${params.name} deleted.`;
+        setTimeout(() => {  window.location.reload(); }, 2000);
         break;
       case 'GET':
         // console.log(params);
@@ -53,8 +54,7 @@ async function equipment_requests(method, endpoint, path, params) {
         }
         // console.log(post_params);
         url = endpoint;
-        document.getElementById("post-form").style.visibility = "hidden"; 
-        document.getElementById("boards-picker").style.visibility = "hidden"; 
+        hide_post_form();
         response = await make_request(method, url, post_params);
         document.getElementById("manage-wrapper").innerHTML = `${params.element}` + " added.";
         setTimeout(() => {  window.location.reload(); }, 2000);
@@ -126,4 +126,23 @@ function populate_picker(picker, elements){
     boards.add(option);
   }
   boards.style.visibility = "visible";
+}
+
+function post_data(url, data){
+  post_data = {
+    element: data.element,
+    name: document.getElementById('add-equipment-name').value, 
+    user: data.user,
+    equipment: document.getElementById('post-form-equipment').textContent,
+    // board: document.getElementById('boards-picker').selectedOptions[0].value
+  };
+  if (data.element != 'Equipment'){
+    post_data.board = document.getElementById('boards-picker').selectedOptions[0].value;
+  }
+  equipment_requests(
+    'POST',
+    url,
+    null,
+    post_data
+  )
 }

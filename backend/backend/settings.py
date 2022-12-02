@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 DJANGO_APPS = [
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,11 +45,13 @@ DJANGO_APPS = [
     'rest_framework',
     'django_registration',
     'webpack_loader',
+    # "channels" # for 'runworker' command
 ]
 
 MY_APPS = [
-    # 'courses',
     'api',
+    'management',
+    'mqtt'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + MY_APPS
@@ -82,6 +85,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "backend.asgi.application"
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 

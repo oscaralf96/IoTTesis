@@ -1,0 +1,3 @@
+docker-compose exec mqtt_brocker mosquitto_sub -v -t sensors
+
+docker-compose exec mqtt_brocker mosquitto_pub -t sensors -m 'Hello World!'

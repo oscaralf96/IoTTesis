@@ -14,78 +14,77 @@
     class="add-equipment" 
     onclick="post_form(
         'Equipment',
-        'http://localhost:8020/api/equipments/');">Add new Equipment</label>
+        'http://localhost:8020/api/equipments/',
+        null
+    );">
+    Add new Equipment
+</label>
 
-    {% for equipment in equipments %}
-            <div class="Eq-title">
-                <h1 class="titles">{{ equipment.equipment }}</h1>
-                <button class="button" onclick="equipment_requests('GET', 'http://localhost:8020/manage/equipment/', {{equipment.equipment.pk}}, {element: 'equipment'})">Manage</button>
-            </div>
-            <hr class="h-separators"></hr>
-            <div class="eq-container">
-                {% for device in equipment.devices %}
-                    <div class="card-wrapper">
-                        <div class="card">
-                            <a href="/courses{{ science }}/{{ course.name }}">
-                            </a>
-                            <div class="card-img">
-                                <img src="{{ device.device.board.image.url }}"/>
-                            </div>
-                            <label class="card-title">{{ device.device.board }}</label>
+{% for equipment in equipments %}
+        <div class="Eq-title">
+            <h1 class="titles">{{ equipment.equipment }}</h1>
+            <button class="button" onclick="equipment_requests('GET', 'http://localhost:8020/manage/equipment/', {{equipment.equipment.pk}}, {element: 'equipment'})">Manage</button>
+        </div>
+        <hr class="h-separators"></hr>
+        <div class="eq-container">
+            {% for device in equipment.devices %}
+                <div class="card-wrapper">
+                    <div class="card">
+                        <a href="/courses{{ science }}/{{ course.name }}">
+                        </a>
+                        <div class="card-img">
+                            <img src="{{ device.device.board.image.url }}"/>
                         </div>
+                        <label class="card-title">{{ device.device.board }}</label>
                     </div>
-                {% endfor %}
-            </div>
-    {% endfor %}
-
-
-    <div id="manage-pop" class="pop-div">
-        <div class="close-button" onclick='hide_manage()'>
-            X
+                </div>
+            {% endfor %}
         </div>
-        <div id="manage-wrapper" class="manage-card-wrapper">
+{% endfor %}
 
-        </div>
+
+<div id="manage-pop" class="pop-div">
+    <div class="close-button" onclick='hide_manage()'>
+        X
     </div>
+    <div id="manage-wrapper" class="manage-card-wrapper">
 
-    <div id="post-form" class="pop-div post-form">
-        <div class="close-button" onclick='hide_post_form()'>
-            X
-        </div>
-        <div id="manage-wrapper" class="manage-card-wrapper">
-            <label id="post-form-id"></label>
-            <label id="post-form-url" style="visibility: hidden;" ></label>
-            <label id="post-form-equipment" style="visibility: hidden;"></label>
-            <label id="post-form-device" style="visibility: hidden;"></label>
-            <div style="flex: 1;">
-                <label id="post-form-name"></label>
-                <label id="#" style="padding-left: 6px;"> name:</label>
-            </div>
-            <input id="add-equipment-name" type="text" name="name" class="form-input" style="flex: 1;"/>
-            <select  
-                name="boards"
-                class="form-select" 
-                id="boards-picker">
-            </select>
-            <button 
-                class="button"  
-                style="flex: 1;"
-                onclick="equipment_requests(
-                    'POST',
-                    document.getElementById('post-form-url').textContent,
-                    null,
-                    {
-                        element: document.getElementById('post-form-name').textContent,
-                        name: document.getElementById('add-equipment-name').value, 
-                        user: {{request.user.pk}},
-                        equipment: document.getElementById('post-form-equipment').textContent,
-                        board: document.getElementById('boards-picker').selectedOptions[0].value
-                    }
-                );">
-            Add
-            </button>  
-        </div>
     </div>
+</div>
 
-    <script src= "{% static 'js/manage.js' %}"></script>
+<div id="post-form" class="pop-div post-form">
+    <div class="close-button" onclick='hide_post_form()'>
+        X
+    </div>
+    <div id="manage-wrapper" class="manage-card-wrapper">
+        <label id="post-form-id"></label>
+        <label id="post-form-url" style="visibility: hidden;" ></label>
+        <label id="post-form-equipment" style="visibility: hidden;"></label>
+        <label id="post-form-device" style="visibility: hidden;"></label>
+        <div style="flex: 1;">
+            <label id="post-form-name"></label>
+            <label id="#" style="padding-left: 6px;"> name:</label>
+        </div>
+        <input id="add-equipment-name" type="text" name="name" class="form-input" style="flex: 1;"/>
+        <select  
+            name="boards"
+            class="form-select" 
+            id="boards-picker">
+        </select>
+        <button 
+            class="button"  
+            style="flex: 1;"
+            onclick="post_data(
+                document.getElementById('post-form-url').textContent,
+                {
+                    element: document.getElementById('post-form-name').textContent,
+                    user: {{request.user.pk}},
+                }
+            );">
+        Add
+        </button>  
+    </div>
+</div>
+
+<script src= "{% static 'js/manage.js' %}"></script>
 {% endblock %}

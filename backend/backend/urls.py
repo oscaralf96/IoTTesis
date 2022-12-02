@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('manage/', include(('management.urls', 'management'), namespace='management')),
     path('api/', include(('api.urls', 'api'), namespace='api')),
+    path('mqtt/', include(('mqtt.urls', 'mqtt'), namespace='mqtt')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
