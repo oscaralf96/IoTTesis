@@ -18,11 +18,13 @@ def on_connect(client, userdata, flags, rc):
     # reconnect then subscriptions will be renewed.
     if client.subscribe(topic):
         logging.info(f"subcribed to: {topic}")
+    if client.subscribe(f'response/{topic}'):
+        logging.info(f"subcribed to: response/{topic}")
 
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-    print()
+    print(msg)
     # subprocess.call('clear')  # subprocess.run(['clear'])
 
     #logging.info(f"New message from: {client._username}:{userdata}")

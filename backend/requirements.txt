@@ -10,3 +10,4 @@ django-cors-headers
 django-registration
 django-webpack-loader
 paho-mqtt
+mqttasgi

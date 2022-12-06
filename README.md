@@ -3,10 +3,10 @@ IoT project guide. Technologies: Django Rest API, PostgreSQL, MQTT, ESP32. All r
 
 In the mqtt message follow th enext structure:
 
-    "board_id#sensor_id#value"
+    "device_id#gauge_id#value"
 
-    board_id: get on web page
-    sensor_id: get on web page
+    device_id: get on web page
+    gauge_id: get on web page
 
 ### Django project steps:
 

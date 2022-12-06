@@ -51,7 +51,7 @@ DJANGO_APPS = [
 MY_APPS = [
     'api',
     'management',
-    'mqtt'
+    'mqtt',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + MY_APPS
@@ -185,3 +185,4 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     )
 }
+
