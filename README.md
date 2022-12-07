@@ -88,3 +88,5 @@ run: python manage.py migrate
         django_registration
         webpack
 
+
+## mqttasgi -H localhost -p 1883 my_application.asgi:application

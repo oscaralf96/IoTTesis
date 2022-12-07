@@ -11,3 +11,4 @@ django-registration
 django-webpack-loader
 paho-mqtt
 mqttasgi
+channels_redis

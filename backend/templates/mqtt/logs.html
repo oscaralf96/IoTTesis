@@ -1,0 +1,34 @@
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Logs</title>
+</head>
+<body>
+
+    In this page you can see the Mqtt messages from the topics of your gauges.
+    {{ request.user.pk|json_script:"user-id" }}
+    <script>
+        const userName = JSON.parse(document.getElementById('user-id').textContent);
+        {% comment %} console.log(ty(userName)); {% endcomment %}
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/logs/'
+            + userName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            console.log(data.message);
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+    </script>
+</body>
+</html>

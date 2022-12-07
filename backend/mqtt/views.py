@@ -4,11 +4,12 @@ from django.http import HttpResponse
 # Create your views here.
 def show_logs(request):
     
-    # return render(
-    #     request=request,
-    #     template_name='equipment/add_device.html',
-    #     context={
+    return render(
+        request=request,
+        template_name='mqtt/logs.html',
+        context={
 
-    #     }
-    # )
-    return HttpResponse('logs')
+        }
+    )
+
+    
