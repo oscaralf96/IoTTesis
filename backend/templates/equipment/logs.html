@@ -1,0 +1,20 @@
+{% extends "equipment/main.html" %}
+
+{% load static %}
+
+{% block head_content %}
+<title>Equipos</title>
+<link rel="stylesheet" href="{% static 'css/dashboard/content/cards.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard/content/manage_card.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard/content/equipment.css' %}">
+{% endblock %}
+
+{% block container %}
+In this page you can see the Mqtt messages from the topics of your gauges.
+
+    <div class="logs-list-container" id="logs-list-container"></div>
+
+    <script src= "{% static 'js/logs.js' %}"></script>
+
+{% endblock %}
+    

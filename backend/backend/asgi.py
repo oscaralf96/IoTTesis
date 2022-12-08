@@ -20,7 +20,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 
 from mqtt.consumers import MyMqttConsumer
-from mqtt.routing import websocket_urlpatterns
+from management.routing import websocket_urlpatterns
 
 
 # Initialize Django ASGI application early to ensure the AppRegistry

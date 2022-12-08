@@ -6,7 +6,7 @@ host = "localhost"
 topic = "sensors"
 
 board_id = "1"
-sensor_id = "6"
+sensor_id = "1"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):

@@ -29,6 +29,10 @@
     padding: 15px;
 }
 
+.card:hover {
+    background-color: rgba(16, 79, 113, 0.704);
+}
+
 .card img{
     width: 75px;
     height: 75px;

@@ -29,9 +29,7 @@
         <div class="eq-container">
             {% for device in equipment.devices %}
                 <div class="card-wrapper">
-                    <div class="card">
-                        <a href="/courses{{ science }}/{{ course.name }}">
-                        </a>
+                    <div class="card" onclick="location.href='{% url "management:logs" device=device.device.pk %}';">
                         <div class="card-img">
                             <img src="{{ device.device.board.image.url }}"/>
                         </div>
@@ -87,4 +85,6 @@
 </div>
 
 <script src= "{% static 'js/manage.js' %}"></script>
+
+
 {% endblock %}

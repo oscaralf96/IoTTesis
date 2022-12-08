@@ -107,3 +107,13 @@ def headers_test(request):
     print(request.headers['Content-Type'])
     print(request.POST)
     return HttpResponse(request.headers)
+
+def show_logs(request, device):
+
+    return render(
+        request=request,
+        template_name='equipment/logs.html',
+        context={
+
+        }
+    )
