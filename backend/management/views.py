@@ -109,11 +109,11 @@ def headers_test(request):
     return HttpResponse(request.headers)
 
 def show_logs(request, device):
-
+    device = Device.objects.get(pk=device)
     return render(
         request=request,
         template_name='equipment/logs.html',
         context={
-
+            'device': device
         }
     )

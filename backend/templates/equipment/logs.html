@@ -4,17 +4,29 @@
 
 {% block head_content %}
 <title>Equipos</title>
-<link rel="stylesheet" href="{% static 'css/dashboard/content/cards.css' %}">
-<link rel="stylesheet" href="{% static 'css/dashboard/content/manage_card.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard/content/logs.css' %}">
 <link rel="stylesheet" href="{% static 'css/dashboard/content/equipment.css' %}">
 {% endblock %}
 
 {% block container %}
-In this page you can see the Mqtt messages from the topics of your gauges.
+In this page you can see the Mqtt messages from your {{device.board.name}}'s topics.
 
     <div class="logs-list-container" id="logs-list-container"></div>
 
+    {% comment %} <div class="log-wrapper">
+        <div class="log-item gauge">
+            <label>LM35</label>
+        </div>
+        <div class="log-item value">
+            <label>42</label>
+        </div>
+        <div class="log-item datestamp">
+            <label>12/08/2022, 18:26:32</label>
+        </div>
+    </div> {% endcomment %}
+
     <script src= "{% static 'js/logs.js' %}"></script>
+    <script src= "{% static 'js/manage.js' %}"></script>
 
 {% endblock %}
     

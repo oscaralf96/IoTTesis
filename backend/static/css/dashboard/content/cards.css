@@ -29,11 +29,24 @@
     padding: 15px;
 }
 
+.card-in-manager{
+    display: flex;  
+    flex-flow: row;
+    background-color: rgba(23, 123, 177, 0.704);
+    padding: 6px;
+    border: 3px solid black;
+    border-radius: 15px;
+    width: 300px;
+    height: 100px;
+    align-items: center;
+    padding: 15px;
+}
+
 .card:hover {
     background-color: rgba(16, 79, 113, 0.704);
 }
 
-.card img{
+.card img, .card-in-manager img{
     width: 75px;
     height: 75px;
     border-radius: 50%;
@@ -65,12 +78,12 @@
   }
 
 .card-title-manage:hover:before {
-content: "Delete";
-border: 2px solid black;
-border-radius: 15px;
-background-color: rgb(221, 57, 98);
-padding: 3px;
-font-size: 25px;
+    content: "Delete";
+    border: 2px solid black;
+    border-radius: 15px;
+    background-color: rgb(221, 57, 98);
+    padding: 3px;
+    font-size: 25px;
 }
 
 .mini-card-wrapper {  

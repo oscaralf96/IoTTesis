@@ -2,6 +2,7 @@
     position: absolute;
     top:  50%;
     left: 50%;
+    margin: 20px;
     transform: translate(calc(-50% + 100px),-50%);
     visibility: hidden;
 }
@@ -16,6 +17,8 @@
     border-radius: 15px;
     align-items: center;
     padding: 30px 15px 15px 15px;
+    overflow:auto;
+    max-height: 750px;
 }
 
 #boards-picker {
@@ -26,6 +29,10 @@
 @media only screen and (max-width: 700px) {
     .pop-div {
         transform: translate(-50%,-50%);
+    }
+    .manage-card-wrapper {
+        max-height: 500px;
+        
     }
   }
     

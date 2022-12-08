@@ -1,0 +1,42 @@
+.log-wrapper {
+    display: flex;  
+    flex-flow: row;
+    background-color: rgb(196, 225, 172);
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 15px;
+    width:max;
+    height: 35px;
+    align-items: center;
+    /* justify-content: space-between;  */
+    margin-top: 5px;
+}
+
+.log-item {
+    display: flex;
+    flex-flow: row;
+    /* border: 2px solid white; */
+    border-radius: 15px;
+    width: calc(100% / 3);
+}
+
+.gauge {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.log-item.gauge label {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.log-item.value label {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 25px;
+}
+
+.log-item.datestamp label {
+    margin-left: auto; 
+    margin-right: 0;
+}

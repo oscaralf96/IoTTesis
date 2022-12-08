@@ -20,7 +20,7 @@ chatSocket.onmessage = function(e) {
     items.push(data);
 
     if(!document.getElementById("list")) {
-        document.getElementById('logs-list-container').appendChild(ul);
+        // document.getElementById('logs-list-container').appendChild(ul);
         }
 
         updateLogsList();
@@ -30,22 +30,35 @@ chatSocket.onmessage = function(e) {
 function updateLogsList() {
 
     // clear list
-    ul.innerHTML = "";
+    logsList = document.getElementById('logs-list-container');
+    logsList.innerHTML = "";
     
     items.forEach(function(item) {
+    var logsWrapper = document.createElement('div');
+    logsWrapper.setAttribute('class', 'log-wrapper');
     
-    // build list item text
-    var itemText = document.createElement('span');
-        itemText.setAttribute('class', 'to-do-list__list-item-text');
-        itemText.innerHTML += item.value;
+    var divGauge = document.createElement('div');
+    divGauge.setAttribute('class', 'log-item gauge');
+    var gauge = document.createElement('label');
+    gauge.innerHTML += item.board;
+    divGauge.appendChild(gauge);
+    logsWrapper.appendChild(divGauge);
+        
+    var divValue = document.createElement('div');
+    divValue.setAttribute('class', 'log-item value');
+    var value = document.createElement('label');
+    value.innerHTML += item.value;
+    divValue.appendChild(value);
+    logsWrapper.appendChild(divValue);
+        
+    var divDatestamp = document.createElement('div');
+    divDatestamp.setAttribute('class', 'log-item datestamp');
+    var datestamp = document.createElement('label');
+    datestamp.innerHTML += item.datestamp;
+    divDatestamp.appendChild(datestamp);
+    logsWrapper.appendChild(divDatestamp);
     
-    // build list item
-    var li = document.createElement('li');
-        li.setAttribute('class', 'to-do-list__list-item');
-        li.appendChild(itemText);
-
-    // add list item to list
-    ul.appendChild(li);
+    logsList.appendChild(logsWrapper);
     });
 }
 

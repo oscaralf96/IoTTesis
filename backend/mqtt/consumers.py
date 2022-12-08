@@ -18,7 +18,7 @@ class MyMqttConsumer(MqttConsumer):
 
         if len(message) == 3:
             socket_data = await self.new_measure(int(message[1]), int(message[2]))
-            socket_data['gauge'] = int(message[0])
+            socket_data['gauge'], socket_data['board']  = await self.getBoard(int(message[0]))
             socket_data['value'] = int(message[2])
 
 
@@ -47,6 +47,11 @@ class MyMqttConsumer(MqttConsumer):
         return {
             'datestamp': measure.datestamp.strftime("%m/%d/%Y, %H:%M:%S")
         }
+    
+    @database_sync_to_async
+    def getBoard(self, gauge):
+        db_response = Gauge.objects.get(pk=gauge)
+        return db_response.pk, db_response.sensor.name
         
     async def disconnect(self):
         await self.unsubscribe('sensors')
