@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 import requests
 from backend.settings import SERVER_URL
 from api.models import *
@@ -80,25 +81,6 @@ def manage_equipment(request, pk):
         }
     )
 
-def add_equipment(request):
-    
-    return render(
-        request=request,
-        template_name='equipment/add_equipment.html',
-        context={
-
-        }
-    )
-    
-def add_device(request):
-    
-    return render(
-        request=request,
-        template_name='equipment/add_device.html',
-        context={
-
-        }
-    )
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -108,6 +90,7 @@ def headers_test(request):
     print(request.POST)
     return HttpResponse(request.headers)
 
+@login_required
 def show_logs(request, device):
     device = Device.objects.get(pk=device)
     return render(
@@ -117,3 +100,52 @@ def show_logs(request, device):
             'device': device
         }
     )
+
+@login_required
+def user(request):
+    
+    return render(
+        request=request,
+        template_name='equipment/user.html', 
+        context={
+
+        }
+    )
+@login_required()
+def settings(request):    
+    return render(
+        request=request, 
+        template_name='equipment/settings.html', 
+        context={
+        }
+    )
+
+    
+@login_required()
+def support(request):    
+    return render(
+        request=request, 
+        template_name='equipment/support.html', 
+        context={
+        }
+    )
+
+
+@login_required()
+def comodin(request):    
+    return render(
+        request=request, 
+        template_name='equipment/comodin.html', 
+        context={
+        }
+    )
+
+    
+@login_required()
+def home(request):    
+    return render(
+        request=request, 
+        template_name='equipment/home.html', 
+        context={
+        }
+    )  

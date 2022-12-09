@@ -325,22 +325,22 @@ function page(element) {
             location.href='/manage/home/';
             break;
         case "item-user":
-            location.href='/user/';
+            location.href='/manage/user/';
             break;
         case "item-equipment":
             location.href='/manage/equipment/';            
             break;
         case "item-settings":
-            location.href='/settings/';            
+            location.href='/manage/settings/';            
             break;
         case "item-support":
-            location.href='/support/';            
+            location.href='/manage/support/';            
             break;
         case "item-quit":
             window.location.href='/users/logout/';
             break;
         case "item-comodin":
-            window.location.href='/comodin/';            
+            window.location.href='/manage/comodin/';            
             break;
     }
 }

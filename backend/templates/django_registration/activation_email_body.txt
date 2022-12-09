@@ -1,0 +1,1 @@
+{{schema}}://{{request.get_host}}/users/activate/{{activation_key}}

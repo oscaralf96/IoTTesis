@@ -52,6 +52,7 @@ MY_APPS = [
     'api',
     'management',
     'mqtt',
+    'users'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + MY_APPS
@@ -64,6 +65,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'backend.middleware.ProfileCompletionMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -161,9 +164,9 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-""" LOGIN_URL = '/users/login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = LOGIN_URL """
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/manage/equipment/'
+LOGOUT_REDIRECT_URL = LOGIN_URL
 
 # Necesarios para la ubicacion de archivos multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -179,8 +182,8 @@ REGISTRATION_SALT = "registration"  # set to default value
 #emails
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'racsogonzalez30@gmail.com    '
-EMAIL_HOST_PASSWORD = 'fenpnpmsxniepvwc'
+EMAIL_HOST_USER = 'alfredo.zetagas@gmail.com'
+EMAIL_HOST_PASSWORD = 'hmkyhdqvbcjjfzxk'
 EMAIL_PORT = 587
 
 REST_FRAMEWORK = {

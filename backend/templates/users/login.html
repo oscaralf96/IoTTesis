@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+{% load static %}
+<title>Science - Login</title>
+
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/login/base.css' %}">
+{% endblock %}
+
+{% block container %}
+<div class="main">
+       
+</div>
+
+<div class="form-container">
+    <h2 class="">Login</h2>
+    <p class="">Please enter your email and password!</p>
+    <form method="post" action="{% url 'users:login' %}">
+        {% csrf_token %}
+        <div class="">
+            <input type="text" name="username" placeholder="User Example" class="form-input" />
+            <label class="form-label" for="typeEmailX">Username</label>
+        </div>
+
+        <div class="form-block">
+            <input type="password" name="password" placeholder="SecurePassword!" class="form-input" />
+            <label class="form-label" for="typePasswordX">Password</label>
+        </div>
+
+        <p class=""><a class="" href="#!">Forgot password?</a></p>
+
+        <button class="form-button" type="submit">Login</button>
+    </form>
+    
+    <div>
+        <p class="mb-0">Don't have an account? <a href="{% url 'users:registration' %}" class="">Sign Up</a>
+        </p>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

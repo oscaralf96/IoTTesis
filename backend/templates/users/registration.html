@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+{% load static %}
+<title>Science - Signup</title>
+
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/login/base.css' %}">
+{% endblock %}
+
+{% block container %}
+<div class="main">
+       
+</div>
+
+
+
+<div class="form-container">
+
+    <h2 class="">Sign up</h2>
+    <p class="">Please enter your info</p>
+    <form method="post" action="{% url 'users:registration' %}">
+        {% csrf_token %}
+
+        {% for error in form.username.errors %}
+            <p class="alert alert-danger">{{ error }}</p>
+        {% endfor %}
+        <div class="form-block">
+            <input type="text" name="username" class="form-input" />
+            <label class="form-label" for="typeEmailX">User</label>
+        </div>   
+        
+        {% for error in form.email.errors %}
+            <p class="alert alert-danger">{{ error }}</p>
+        {% endfor %}
+        <div class="form-block">
+            <input type="email" name="email" class="form-input" />
+            <label class="form-label" for="typeEmailX">Email</label>
+        </div>      
+
+        {% for error in form.password1.errors %}
+                <p class="alert alert-danger">{{ error }} </p>
+        {% endfor %}
+
+        {% for error in form.password2.errors %}
+                <p class="alert alert-danger">{{ error }} </p>
+        {% endfor %}
+        <div class="form-block">
+            <input type="password" name="password1" class="form-input" />
+            <label class="form-label" for="typePasswordX">Password</label>
+        </div>
+
+        <div class="form-block">
+            <input type="password" name="password2" class="form-input" />
+            <label class="form-label" for="typePasswordX">Password Confirmation</label>
+        </div>
+
+        <button class="form-button" type="submit">Sign up</button>
+    </form>
+    
+    <div>
+        <p class="mb-0">Alreay have an account? <a href="{% url 'users:login' %}" class="text-white-50 fw-bold">Sign in</a>
+        </p>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

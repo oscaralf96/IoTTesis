@@ -1,7 +1,7 @@
 .log-wrapper {
     display: flex;  
     flex-flow: row;
-    background-color: rgb(196, 225, 172);
+    background-color: rgb(195, 209, 184);
     padding: 10px;
     border: 2px solid black;
     border-radius: 15px;
