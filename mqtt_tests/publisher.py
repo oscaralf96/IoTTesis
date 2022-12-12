@@ -22,7 +22,7 @@ client.on_connect = on_connect
 client.connect(host, 1884, 60)
 print('connected')
 
-for i in range(10):
+for i in range(100):
     client.publish(topic,f"{board_id}#{sensor_id}#{randint(25, 50)}")
-    time.sleep(2)
+    time.sleep(0.1)
 

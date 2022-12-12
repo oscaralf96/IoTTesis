@@ -37,10 +37,19 @@ services:
     image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=super
       - POSTGRES_PASSWORD=super
       - POSTGRES_DB=science
+
+  grafana:
+    image: grafana/grafana-enterprise
+    depends_on:
+        - db
+    ports:
+        - 3000:3000
 
 volumes:
   postgres_data:
