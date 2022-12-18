@@ -6,7 +6,7 @@ Install mosquito:
 
 Manage mosquitto server:
 	sudo systemctl stop mosquitto
-	sudo sustem start mosquitto
+	sudo system start mosquitto
 	sudo systemctl restart mosquitto
 
 mosquitto conf file:
