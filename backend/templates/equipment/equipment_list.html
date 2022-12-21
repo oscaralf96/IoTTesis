@@ -5,7 +5,7 @@
             <h1 class="titles">{{ equipment.equipment }}</h1><label 
             class="delete-button" 
             onclick="equipment_requests(
-                'DELETE', 'http://localhost:8020/api/equipments/', 
+                'DELETE', '/api/equipments/', 
                 {{equipment.equipment.pk}}, 
                 {
                     element:'equipment',
@@ -19,7 +19,7 @@
             class="add-equipment"
             onclick="post_form(
                 'Device',
-                'http://localhost:8020/api/devices/',
+                '/api/devices/',
                 {{equipment.equipment.pk}}
             );">
             Add new Device
@@ -39,7 +39,7 @@
                             class="card-title-manage" 
                             onclick="equipment_requests(
                                 'DELETE',
-                                'http://localhost:8020/api/devices/',
+                                '/api/devices/',
                                 {{ device.device.pk }}, 
                                 {
                                     element: 'Device',
@@ -52,7 +52,7 @@
                             <div class="mini-card" 
                             onclick="equipment_requests(
                                 'DELETE', 
-                                'http://localhost:8020/api/gauges/', 
+                                '/api/gauges/', 
                                 {{ gauge.gauge.id }}, 
                                 {
                                     element: 'Gauge',
@@ -69,7 +69,7 @@
                     class="add-equipment"
                     onclick="post_form(
                         'Gauge',
-                        'http://localhost:8020/api/gauges/',
+                        '/api/gauges/',
                         {{ device.device.pk }}
                     );">
                 Add new Gauge

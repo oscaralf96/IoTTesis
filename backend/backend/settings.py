@@ -30,6 +30,14 @@ SECRET_KEY = 'django-insecure-e9)ofz8)--r$$p+ad_%#f$mq7p)-+jqaxc6lraa6-hop7v#s42
 DEBUG = env.bool('DEBUG', False)  # True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:1337",
+    "https://127.0.0.1:1337",
+    "http://localhost:1337",
+    "https://localhost:1337",
+    "http://10.24.17.45:1337",
+    "https://10.24.17.45:1337"
+]
 
 
 # Application definition
@@ -150,9 +158,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = 'static/'
+# STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATICFILES_DIRS = (
-    BASE_DIR / "static",
+    # BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'static'),
 )
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

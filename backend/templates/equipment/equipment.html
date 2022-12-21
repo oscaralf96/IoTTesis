@@ -14,7 +14,7 @@
     class="add-equipment" 
     onclick="post_form(
         'Equipment',
-        'http://localhost:8020/api/equipments/',
+        '/api/equipments/',
         null
     );">
     Add new Equipment
@@ -23,7 +23,7 @@
 {% for equipment in equipments %}
         <div class="Eq-title">
             <h1 class="titles">{{ equipment.equipment }}</h1>
-            <button class="button" onclick="equipment_requests('GET', 'http://localhost:8020/manage/equipment/', {{equipment.equipment.pk}}, {element: 'equipment'})">Manage</button>
+            <button class="button" onclick="equipment_requests('GET', '/manage/equipment/', {{equipment.equipment.pk}}, {element: 'equipment'})">Manage</button>
         </div>
         <hr class="h-separators"></hr>
         <div class="eq-container">

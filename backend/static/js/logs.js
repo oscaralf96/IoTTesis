@@ -7,7 +7,7 @@ ul.setAttribute('id', 'list' );
 
 const chatSocket = new WebSocket(
     'ws://'
-    + window.location.host
+    + "localhost:8001" //window.location.host
     + '/ws/logs/'
     + device
     + '/'
@@ -64,5 +64,5 @@ function updateLogsList() {
 
 
 chatSocket.onclose = function(e) {
-    console.error('Chat socket closed unexpectedly');
+    console.error('Socket closed unexpectedly');
 };

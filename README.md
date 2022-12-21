@@ -89,4 +89,4 @@ run: python manage.py migrate
         webpack
 
 
-## mqttasgi -H localhost -p 1883 my_application.asgi:application
+## mqttasgi -H mqtt_brocker -p 1883 my_application.asgi:application

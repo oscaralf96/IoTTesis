@@ -10,7 +10,7 @@ function hide_post_form() {
 
 
 async function equipment_requests(method, endpoint, path, params) {
-  let url = "";
+  let url = `http://${window.location.host}` + endpoint;
   let response;
   let post_params = {};
 
@@ -66,7 +66,8 @@ async function equipment_requests(method, endpoint, path, params) {
   }  
 }
 
-async function make_request (method, url, params){
+async function make_request (method, endpoint, params){
+  let url = `http://${window.location.host}` + endpoint
   // console.log('-----------------request--------------');
   // console.log(url);
   // console.log(params);
@@ -91,7 +92,8 @@ async function make_request (method, url, params){
   });
 }
 
-async function post_form(element, url, device){
+async function post_form(element, endpoint, device){
+  let url = `http://${window.location.host}` + endpoint
   let response;
   // console.log(device);
   document.getElementById("post-form").style.visibility = "visible";  
@@ -100,14 +102,14 @@ async function post_form(element, url, device){
   document.getElementById("post-form-equipment").textContent = device; 
   document.getElementById("add-equipment-name").style.visibility = "visible"; 
   if (element === 'Device') { 
-    response = await make_request('GET', 'http://localhost:8020/api/boards/');
+    response = await make_request('GET', '/api/boards/');
     response = JSON.parse(response);
     populate_picker('boards-picker', response);
     document.getElementById("add-equipment-name").style.visibility = "hidden"; 
     
   }
   if (element === 'Gauge') { 
-    response = await make_request('GET', 'http://localhost:8020/api/sensors/');
+    response = await make_request('GET', '/api/sensors/');
     response = JSON.parse(response);
     populate_picker('boards-picker', response);
     document.getElementById("add-equipment-name").style.visibility = "hidden"; 
