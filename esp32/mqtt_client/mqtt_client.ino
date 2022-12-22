@@ -8,7 +8,7 @@ const char* password = "MiExtender16";
 
 // Add your MQTT Broker IP address, example:
 //const char* mqtt_server = "192.168.1.144";
-const char* mqtt_server = "192.168.1.65";
+const char* mqtt_server = "192.168.1.41"; //65
 //const char* mqtt_server = "broker.emqx.io";
 
 const int ledPin = 4;
@@ -20,7 +20,7 @@ void setup() {
   Serial.begin(115200);
   
   setup_wifi();
-  client.setServer(mqtt_server, 1883);
+  client.setServer(mqtt_server, 1884);
   client.setCallback(callback);
   
   pinMode(ledPin, OUTPUT);
