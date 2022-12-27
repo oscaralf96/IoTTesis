@@ -8,20 +8,34 @@ function hide_post_form() {
   document.getElementById("add-equipment-name").style.visibility = "hidden"; 
 }
 
+function hide_boards_post_form() {
+  document.getElementById("boards-post-form").style.visibility = "hidden";
+}
+
+function hide_sensors_post_form() {
+  document.getElementById("sensors-post-form").style.visibility = "hidden";
+}
+
 
 async function equipment_requests(method, endpoint, path, params) {
   let url = `http://${window.location.host}` + endpoint;
   let response;
-  let post_params = {};
+  // let post_params = {};
+  const post_params = new FormData()
 
   try {
     switch (method) {
       case 'DELETE':
-        url = endpoint +  `${path}/`;
-        response = await make_request(method, url);
-        document.getElementById("manage-wrapper").innerHTML = `${path} - ${params.name} deleted.`;
-        setTimeout(() => {  window.location.reload(); }, 2000);
-        break;
+        if (window.confirm("Do you really want to delete it?")) {
+          url = endpoint +  `${path}/`;
+          response = await make_request(method, url);
+          document.getElementById("manage-wrapper").innerHTML = `${path} - ${params.name} deleted.`;
+          setTimeout(() => {  window.location.reload(); }, 2000);
+          break;
+        }else {
+          document.getElementById("manage-pop").style.visibility = "visible";
+          break;
+        }
       case 'GET':
         // console.log(params);
         if (path){
@@ -31,37 +45,47 @@ async function equipment_requests(method, endpoint, path, params) {
         }
         response = await make_request(method, url);
         document.getElementById("manage-wrapper").innerHTML = response;
+        document.getElementById("manage-pop").style.visibility = "visible";
         break;
       case 'POST':
-        // console.log(params);
+        console.log(params);
         if (params.element === 'Equipment'){
-          post_params = {
-            user: params.user,
-            name: params.name
-          }
+          post_params.append('user', params.user);
+          post_params.append('name', params.name);
+          hide_post_form();
         }else if(params.element === 'Device'){
           // console.log('equipment post');
-          post_params = {
-            equipment: params.equipment,
-            board: params.board
-          }
+          post_params.append('equipment', params.equipment);
+          post_params.append('board', params.board);
+          hide_post_form();
         }else if(params.element === 'Gauge'){
           // console.log('equipment post');
+          post_params.append('device', params.equipment);
+          post_params.append('sensor', params.board);
+          hide_post_form();
+        }else if(params.element === 'Board'){
+          post_params.append('name', params.name);
+          post_params.append('specs', params.specs);
+          post_params.append('image', document.querySelector('[name=board-image]').files.item(0));
+          console.log(post_params.get('name'));
+          console.log(post_params.get('specs'));
+          console.log(post_params.get('image'));
+          hide_boards_post_form();
+        }else if(params.element === 'Sensor'){
           post_params = {
-            device: params.equipment,
-            sensor: params.board
+            name: params.name,
+            magnitud: params.magnitud,
           }
         }
-        // console.log(post_params);
         url = endpoint;
-        hide_post_form();
         response = await make_request(method, url, post_params);
         document.getElementById("manage-wrapper").innerHTML = `${params.element}` + " added.";
         setTimeout(() => {  window.location.reload(); }, 2000);
-    }
-  
-    document.getElementById("manage-pop").style.visibility = "visible";
+        document.getElementById("manage-pop").style.visibility = "visible";
+        break;
+    }  
   }catch (err){
+    document.getElementById("manage-pop").style.visibility = "visible";
     document.getElementById("manage-wrapper").innerHTML = err;
   }  
 }
@@ -70,6 +94,7 @@ async function make_request (method, endpoint, params){
   let url = `http://${window.location.host}` + endpoint
   // console.log('-----------------request--------------');
   // console.log(url);
+  console.log(endpoint);
   // console.log(params);
   // console.log('--------------------------------------');
   let http_request = new XMLHttpRequest();
@@ -83,9 +108,10 @@ async function make_request (method, endpoint, params){
     }
   }
     http_request.open(method, url, true);
-    http_request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    // http_request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     if (method === 'POST'){
-      http_request.send(JSON.stringify(params));
+      // http_request.send(JSON.stringify(params));
+      http_request.send(params);
     }else{
       http_request.send();
     }
@@ -98,7 +124,7 @@ async function post_form(element, endpoint, device){
   // console.log(device);
   document.getElementById("post-form").style.visibility = "visible";  
   document.getElementById("post-form-name").textContent = element;  
-  document.getElementById("post-form-url").textContent = url;      
+  document.getElementById("post-form-url").textContent = endpoint;      
   document.getElementById("post-form-equipment").textContent = device; 
   document.getElementById("add-equipment-name").style.visibility = "visible"; 
   if (element === 'Device') { 
@@ -131,7 +157,7 @@ function populate_picker(picker, elements){
 }
 
 function post_data(url, data){
-  post_data = {
+  data = {
     element: data.element,
     name: document.getElementById('add-equipment-name').value, 
     user: data.user,
@@ -139,12 +165,13 @@ function post_data(url, data){
     // board: document.getElementById('boards-picker').selectedOptions[0].value
   };
   if (data.element != 'Equipment'){
-    post_data.board = document.getElementById('boards-picker').selectedOptions[0].value;
+    data.board = document.getElementById('boards-picker').selectedOptions[0].value;
   }
+  
   equipment_requests(
     'POST',
     url,
     null,
-    post_data
+    data
   )
 }

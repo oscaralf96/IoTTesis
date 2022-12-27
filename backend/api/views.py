@@ -44,21 +44,25 @@ class EquipmentsByUser(generics.RetrieveUpdateDestroyAPIView):
 
 
 class BoardList(generics.ListCreateAPIView):
+    authentication_classes = []
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
 
 class BoardUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = []
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
 
 class SensorList(generics.ListCreateAPIView):
+    authentication_classes = []
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
 
 
 class SensorUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = []
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
 
