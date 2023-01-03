@@ -12,3 +12,4 @@ django-webpack-loader
 paho-mqtt
 mqttasgi
 channels_redis
+django-cors-headers

@@ -1,0 +1,136 @@
+{% extends "equipment/main.html" %}
+
+{% load static %}
+
+{% block head_content %}
+<title>Resources</title>
+<link rel="stylesheet" href="{% static 'css/dashboard/content/resources.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard/content/manage_card.css' %}">
+{% endblock %}
+
+{% block container %}
+
+
+<div class="title">
+    <h1 class="titles">Boards</h1>  
+</div>
+
+<hr class="h-separators"></hr> 
+
+<div id="boards-table" class="tables">
+    <div class="table-titles table-row">
+        <label class="table-boards-name">Name</label>
+        <label class="table-boards-specs">Specs</label>
+        <label class="table-boards-image">Image</label>
+    </div>
+</div>
+
+<div class="add-button-table">
+    <label onclick="show_boards_form();">Add new Board</label> 
+</div>
+
+
+<div class="title">
+    <h1 class="titles">Sensors</h1>    
+</div>
+
+<hr class="h-separators"></hr> 
+
+<div id="sensors-table" class="tables">    
+    <div class="table-titles table-row">
+        <label class="table-sensors-name">Name</label>
+        <label class="table-sensors-magnitud">Magnitud</label>
+    </div>
+</div>
+
+<div class="add-button-table">
+    <label onclick="show_sensors_form();">Add new Sensor</label> 
+</div>
+
+<div id="manage-pop" class="pop-div">
+    <div class="close-button" onclick='hide_manage()'>
+        X
+    </div>
+    <div id="manage-wrapper" class="manage-card-wrapper">
+
+    </div>
+</div>
+
+<div id="boards-post-form" class="pop-div post-form">
+    <div class="close-button" onclick='hide_boards_post_form()'>
+        X
+    </div>
+    <div id="manage-wrapper" class="manage-card-wrapper">
+        <label id="" class="form-title">Add new Board</label>
+
+        <div style="flex: 1;">
+            <label id="#" style="padding-left: 6px;"> Name:</label>
+        </div>
+        <input id="add-board-name" type="text" name="name" class="form-input" style="flex: 1;"/>
+
+        <div style="flex: 1;">
+            <label id="post-form-specs" style="padding-left: 6px;"> Specs:</label>
+        </div>
+        <textarea id="post-board-form-ta">
+        </textarea>
+
+        <input id="board-img" type="file" name="board-image"></input>
+        <button 
+            class="button"  
+            style="flex: 1;"
+            onclick="equipment_requests(
+                'POST',
+                '/api/boards/',
+                null,
+                {
+                    element: 'Board',
+                    name: document.getElementById('add-board-name').value,
+                    specs: document.getElementById('post-board-form-ta').value,
+                    img: document.querySelector('[name=board-image]').files[0]
+                }
+            );">
+        Add
+        </button>  
+    </div>
+</div>
+
+<div id="sensors-post-form" class="pop-div post-form">
+    <div class="close-button" onclick='hide_sensors_post_form()'>
+        X
+    </div>
+    <div id="manage-wrapper" class="manage-card-wrapper">
+        <label id="" class="form-title">Add new Board</label>
+
+        <div style="flex: 1;">
+            <label id="#" style="padding-left: 6px;"> Name:</label>
+        </div>
+        <input id="add-sensor-name" type="text" name="name" class="form-input" style="flex: 1;"/>
+
+        <div style="flex: 1;">
+            <label id="post-form-specs" style="padding-left: 6px;"> Magnitud:</label>
+        </div>
+        <input id="add-sensor-magnitud" type="text" name="magnitud" class="form-input" style="flex: 1;"/>
+
+        <button 
+            class="button"  
+            style="flex: 1;"
+            onclick="equipment_requests(
+                'POST',
+                '/api/sensors/',
+                null,
+                {
+                    element: 'Sensor',
+                    name: document.getElementById('add-sensor-name').value,
+                    magnitud: document.getElementById('add-sensor-magnitud').value,
+                }
+            );">
+        Add
+        </button>  
+    </div>
+</div>
+        
+<script src= "{% static 'js/manage.js' %}"></script>
+<script src= "{% static 'js/resources.js' %}"></script>
+
+
+{% endblock %}

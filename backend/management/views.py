@@ -101,51 +101,11 @@ def show_logs(request, device):
         }
     )
 
-@login_required
-def user(request):
-    
-    return render(
-        request=request,
-        template_name='equipment/user.html', 
-        context={
-
-        }
-    )
 @login_required()
-def settings(request):    
+def resources(request):    
     return render(
         request=request, 
-        template_name='equipment/settings.html', 
+        template_name='equipment/resources.html', 
         context={
         }
     )
-
-    
-@login_required()
-def support(request):    
-    return render(
-        request=request, 
-        template_name='equipment/support.html', 
-        context={
-        }
-    )
-
-
-@login_required()
-def comodin(request):    
-    return render(
-        request=request, 
-        template_name='equipment/comodin.html', 
-        context={
-        }
-    )
-
-    
-@login_required()
-def home(request):    
-    return render(
-        request=request, 
-        template_name='equipment/home.html', 
-        context={
-        }
-    )  

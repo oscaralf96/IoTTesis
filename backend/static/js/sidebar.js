@@ -321,17 +321,11 @@ function page2(element) {
 
 function page(element) {
     switch (element.id) {
-        case "item-home": 
-            location.href='/manage/home/';
-            break;
-        case "item-user":
-            location.href='/manage/user/';
-            break;
         case "item-equipment":
             location.href='/manage/equipment/';            
             break;
-        case "item-settings":
-            location.href='/manage/settings/';            
+        case "item-resources":
+            location.href='/manage/resources/';            
             break;
         case "item-support":
             location.href='/manage/support/';            
