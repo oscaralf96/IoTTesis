@@ -8,10 +8,12 @@ const char* password = "MiExtender16";
 
 // Add your MQTT Broker IP address, example:
 //const char* mqtt_server = "192.168.1.144";
-const char* mqtt_server = "192.168.1.41"; //65
+const char* mqtt_server = "192.168.1.99"; //65
 //const char* mqtt_server = "broker.emqx.io";
 
 const int ledPin = 4;
+
+String message = "";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -68,7 +70,7 @@ void reconnect() {
     if (client.connect("aaa")) {
       Serial.println("connected");
       // Subscribe
-      client.subscribe("home/lights/sitting_room");
+      client.subscribe("sensors");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -86,7 +88,9 @@ void loop() {
     reconnect();
   }
   client.loop();
-
-  client.publish("home/lights/sitting_room", "ESP-Client");
+  message = "2#2#%d" + random(30, 50);
+  message.c_str();
+  Serial.println(message);
+  client.publish("sensors", message.c_str());
   delay(500);
 }

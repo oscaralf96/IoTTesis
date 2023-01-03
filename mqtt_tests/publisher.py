@@ -5,8 +5,8 @@ import time
 host = "localhost"
 topic = "sensors"
 
-board_id = "1"
-sensor_id = "1"
+device_id = "2"
+gauge_id = "2"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -16,13 +16,13 @@ def on_connect(client, userdata, flags, rc):
     # reconnect then subscriptions will be renewed.
     client.subscribe(topic)
 
-client = mqtt.Client(board_id)
+client = mqtt.Client(device_id)
 client.on_connect = on_connect
 
 client.connect(host, 1884, 60)
 print('connected')
 
 for i in range(100):
-    client.publish(topic,f"{board_id}#{sensor_id}#{randint(25, 50)}")
+    client.publish(topic,f"{device_id}#{gauge_id}#{randint(25, 50)}")
     time.sleep(0.1)
 

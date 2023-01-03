@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
+  # Contenedor Principal (Django) para archivos estaticos
   backend:
     build: ./backend/
     # command: nohup python manage.py runserver 0.0.0.0:8000 && pwd
@@ -14,6 +15,8 @@ services:
       - ./backend/.env
     depends_on:
       - db
+
+  # Contenedor Secundario (Django) para archivos dinamicos
   daphne:
     build: ./backend/
     # command: nohup python manage.py runserver 0.0.0.0:8000 && pwd
@@ -30,6 +33,7 @@ services:
     depends_on:
       - db
 
+  # Contenedor MQTT para brocker
   mqtt_brocker:
     build: ./mosquitto/
     volumes:
@@ -39,17 +43,19 @@ services:
     depends_on:
       - db
 
+  # Contenedor REDIS para caché
   redis:
     image: redis:latest
     # restart: always
     volumes:
-      - ./redis/data/:/data  
+      # - ./redis/data/:/data  
       - cache:/data 
     ports:
       - 6379:6379
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-      
+     
+  # Contenedor POSTGRESQL para base de datos 
   db:
     image: postgres:latest
     volumes:
@@ -61,12 +67,15 @@ services:
       - POSTGRES_PASSWORD=super
       - POSTGRES_DB=science
 
+  # Contenedor GRAFANA para graficos 
   grafana:
     image: grafana/grafana-enterprise
     depends_on:
         - db
     ports:
         - 3000:3000
+        
+  # Contenedor NGINX para servir peticiones web 
   nginx:
     build: ./nginx
     volumes:

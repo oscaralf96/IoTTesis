@@ -31,12 +31,12 @@ DEBUG = env.bool('DEBUG', False)  # True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
-    "http://127.0.0.1:1337",
-    "https://127.0.0.1:1337",
-    "http://localhost:1337",
-    "https://localhost:1337",
-    "http://10.24.17.45:1337",
-    "https://10.24.17.45:1337"
+    "http://127.0.0.1:8080",
+    "https://127.0.0.1:8080",
+    "http://localhost:8080",
+    "https://localhost:8080",
+    "http://10.24.17.45:8080",
+    "https://10.24.17.45:8080"
 ]
 
 
