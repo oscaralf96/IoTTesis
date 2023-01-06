@@ -15,6 +15,8 @@ class MyMqttConsumer(MqttConsumer):
         topic = mqtt_message['topic']
         message = mqtt_message['payload'].decode('utf-8').split('#')
         socket_data = None
+        print(message)
+        mqtt_message['payload'].decode('utf-8')
 
         if len(message) == 3:
             socket_data = await self.new_measure(int(message[1]), int(message[2]))
@@ -24,6 +26,8 @@ class MyMqttConsumer(MqttConsumer):
 
         else:
             print('new message has the incorrect structure')
+            print(message)
+            mqtt_message['payload'].decode('utf-8')
 
         await self.publish(
             'response/' + mqtt_message['topic'],

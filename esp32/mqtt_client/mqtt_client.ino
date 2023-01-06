@@ -8,12 +8,14 @@ const char* password = "MiExtender16";
 
 // Add your MQTT Broker IP address, example:
 //const char* mqtt_server = "192.168.1.144";
-const char* mqtt_server = "192.168.1.99"; //65
+const char* mqtt_server = "192.168.1.190"; //65
 //const char* mqtt_server = "broker.emqx.io";
 
 const int ledPin = 4;
 
-String message = "";
+const char* data = "";
+char integer_string[32];
+char other_string[64] = "";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -53,7 +55,7 @@ void setup_wifi() {
 void callback(char* topic, byte* message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
-  Serial.print(". Message: ");
+  Serial.print(" Message: ");
   String messageTemp;
   
   for (int i = 0; i < length; i++) {
@@ -88,9 +90,16 @@ void loop() {
     reconnect();
   }
   client.loop();
-  message = "2#2#%d" + random(30, 50);
-  message.c_str();
-  Serial.println(message);
-  client.publish("sensors", message.c_str());
+  strcpy(other_string, "2#2#");
+  sprintf(integer_string, "%d", random(30, 50));
+  strcat(other_string, integer_string);
+  data = other_string; // "2#2#"; // + random(30, 50);
+  // data.c_str();
+  Serial.println("------------------------------------");
+  Serial.println("el dato a enviar por MQTT: ");
+  Serial.println(data);
+  Serial.println("------------------------------------");
+  // client.publish("sensors", data.c_str());
+  client.publish("sensors", data);
   delay(500);
 }
