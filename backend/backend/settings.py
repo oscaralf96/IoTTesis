@@ -198,8 +198,8 @@ REGISTRATION_SALT = "registration"  # set to default value
 #emails
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'alfredo.zetagas@gmail.com'
-EMAIL_HOST_PASSWORD = 'hmkyhdqvbcjjfzxk'
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "user@email.com")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "password")
 EMAIL_PORT = 587
 
 REST_FRAMEWORK = {

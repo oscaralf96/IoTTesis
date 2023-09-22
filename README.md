@@ -1,92 +1,86 @@
-# IoTTesis
-IoT project guide. Technologies: Django Rest API, PostgreSQL, MQTT, ESP32. All running over Docker.
+# Proyecto finalizado del trabajo de graduación con titulo "DISEÑO DE UN MANUAL DE APOYO PARA EL CURSO DE PROYECTOS COMPUTACIONALES APLICADOS A I.E. ENFOCADO EN IOT POR MEDIO DE SISTEMAS ASADOS EN CONTENEDORES"
 
-In the mqtt message follow th enext structure:
+El proyecto incluye las siguientes tecnológias: Django Rest API, PostgreSQL, MQTT, ESP32. Todas ejecutadas con Docker.
+
+En los mensajes MQTT utilizar el siguiente formato:
 
     "device_id#gauge_id#value"
 
     device_id: get on web page
     gauge_id: get on web page
 
-### Django project steps:
+## Insstalación del sistema:
 
-- django-admin startproject <name> <path>
-- environ vars:
-        
-        env = environ.Env()
-        environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+- Clonar el proyecto:
+      
+      git clone https://github.com/oscaralf96/IoTTesis.git
 
-        DEBUG = env.bool('DEBUG', False)  # True
+- Crear archivo backend/.env con el siguiente contenido:
 
-- Allow all hosts: 
+     
+      DEBUG=0
+      DJANGO_ALLOWED_HOSTS=LOCALHOST 127.0.0.1 [::1]
 
-        ALLOWED_HOSTS = ['*']
+      SQL_ENGINE=django.db.backends.postgresql
+      SQL_DATABASE=science
+      SQL_USER=super
+      SQL_PASSWORD=super
+      SQL_HOST=db
+      SQL_PORT=5432
 
-- Templates:
-        
-        create var: TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
-        add it to dirs: 'DIRS': [TEMPLATE_DIR],
+- Migrar definiciones a la base de datos:
 
-- Database:
-        
-        DATABASES = {
-            "default": {
-                "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-                "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-                "USER": os.environ.get("SQL_USER", "user"),
-                "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-                "HOST": os.environ.get("SQL_HOST", "localhost"),
-                "PORT": os.environ.get("SQL_PORT", "5432"),
-            }
-        }
+      docker compose exec backend python manage.py migrate
 
-```sh
-run: python manage.py migrate
+- Copiar archivos estáticos:
+
+      docker compose exec backend python manage.py collectstatic
+- Configurar SMTP:
+
+```python
+#emails
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "user@email.com")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "password")
+EMAIL_PORT = 587
 ```
+Si se utliziza una cuenta de Google, seguier las instrucciones en el siguiente enlace: [click.](https://support.google.com/accounts/answer/185833?hl=es-419)
 
-- Timezone: 
+- Registrar usuario en la ruta "<host_IP>:8080/users/register/"
 
-        TIME_ZONE = 'America/Guatemala'
+- Activar cuenta con el enlace enviado al correo electrónico:
+  - El enlace tiene la siguiente estructura:
+  - Modificar a:
 
-- Static files:
+- Ingresar con las credenciales proporcionadas.
 
-        STATIC_URL = 'static/'
-        STATIC_ROOT = 'static/'
-        STATICFILES_DIRS = (
-            BASE_DIR / "static",
-        )
-        STATICFILES_FINDERS = [
-            'django.contrib.staticfiles.finders.FileSystemFinder',
-            'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-        ]
+- Finalizar la configuración del perfil.
 
- #### uncoment coment base_dir / "static" and run: python manage.py collectstatic
- #### comento and uncoment
+- Agregar Elementos a las tablas boards, sensors por medio de la interfaz proporcionada por django rest framework. Las rutas son:
+  - <host>:8080/api/boards/
+  - <host>:8080/api/sensors/
 
-- Media:
+- En el sitio en la sección "Equipment" gestionar el equipo a utilizar según lo requerido.
+  - Crear un equipo.
+  - Agregar dispositivos (Devices).
+  - Agregar medidores (Gauges).
 
-        MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-        MEDIA_URL = 'media/'
+- Inicializar servicio MQTT:
+  - docker compose exec backend mqttasgi -H mqtt_brocker -p 1883 backend.asgi:application
 
-- Django-registration:
+- Configurar dispositivo para enviar mensajes al topic correcto:
+  - La estructura esperado es: "device_id#gauge_id#value". Estos datos pueden observarse en la página web, al lado de cada dispositivo y medidor.
 
-        ACCOUNT_ACTIVATION_DAYS = 7  # One day registration
-        REGISTRATION_OPEN = True  # set to default value
-        REGISTRATION_SALT = "registration"  # set to default value
-    
-- Emails:
+- Configurar Graphana:
+  - En el puerto 3000 de nuestro servidor estará disponible graphana. Ingresar con usuario y contraseña "admin" y actualizar contraseña.
 
-        EMAIL_USE_TLS = True
-        EMAIL_HOST = 'smtp.gmail.com'
-        EMAIL_HOST_USER = 'racsogonzalez30@gmail.com    '
-        EMAIL_HOST_PASSWORD = 'fenpnpmsxniepvwc'
-        EMAIL_PORT = 587
-    
-- add apps:
-        
-        rest_framework, and run:python manage.py migrate
-        django_registration
-        webpack
-
-
-## mqttasgi -H mqtt_brocker -p 1883 my_application.asgi:application
+  - Agregar nueva fuente de datos:
+    - La fuente de datos es una base de datos en PostgreSQ. El el menú lateral selecionamos "connections"  y luego "Data source", buscamos y agregamos PostgreSQL. 
+    - Editamos los campos "Host" con dbÑ5432, "Database" con science, "User" con super y colocamos la contraseña. En TLS/SSL Mode colocamos "disable". 
+    - Guardamos y porbamos la conexión.
+  - Creamos un nuevo dashboard:
+    - En el menú lateral "Dashboard".
+    - En la nueva pantalla "new" , "new dashboard".
+    - En la nueva pantall "Add visualization".
+    - Selecionamos nuestra base de datos, y ocnfiguramos la consulta según deseemos la gráfica.
