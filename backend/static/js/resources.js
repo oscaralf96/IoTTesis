@@ -18,7 +18,8 @@ async function tables () {
         cells[0].setAttribute('class', 'table-boards-name');
         cells[1].innerHTML = response[i].specs;
         cells[1].setAttribute('class', 'table-boards-specs');
-        cells[2].src = response[i].image.slice(16);
+        //console.log(response[i]);
+        cells[2].src = window.location.host + response[i].image.slice(16);
         cells[2].setAttribute('class', 'table-img');
         row.appendChild(cells[0]);
         row.appendChild(cells[1]);
