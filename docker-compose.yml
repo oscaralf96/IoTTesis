@@ -8,7 +8,8 @@ services:
     command: gunicorn --chdir ./backend backend.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
     volumes:
       - ./backend/:/usr/src/app/
-      - static_volume:/usr/src/app/assets/
+      - static_volume:/usr/src/app/static/
+      - media_volume:/usr/src/app/media/
     expose:
       - 8000
     env_file:
@@ -23,7 +24,7 @@ services:
     command: daphne -b 0.0.0.0 -p 8001 backend.asgi:application
     volumes:
       - ./backend/:/usr/src/app/
-      - static_volume:/usr/src/app/assets/
+      - static_volume:/usr/src/app/static/
     ports:
       - 8001:8001
     expose:
@@ -80,6 +81,7 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/home/app/static/
+      - media_volume:/home/app/media/
       # - .nginx/nginx.conf:/etc/nginx/conf.d
     ports:
       - 8080:80
@@ -90,3 +92,4 @@ volumes:
   postgres_data:
   cache:
   static_volume:
+  media_volume:
