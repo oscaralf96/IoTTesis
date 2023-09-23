@@ -2,14 +2,7 @@
 
 El proyecto incluye las siguientes tecnológias: Django Rest API, PostgreSQL, MQTT, ESP32. Todas ejecutadas con Docker.
 
-En los mensajes MQTT utilizar el siguiente formato:
-
-    "device_id#gauge_id#value"
-
-    device_id: get on web page
-    gauge_id: get on web page
-
-## Insstalación del sistema:
+## Instalación del sistema:
 
 - Clonar el proyecto:
       
@@ -93,7 +86,7 @@ Si se utliziza una cuenta de Google, seguier las instrucciones en el siguiente e
 
   - Agregar nueva fuente de datos:
     - La fuente de datos es una base de datos en PostgreSQ. El el menú lateral selecionamos "connections"  y luego "Data source", buscamos y agregamos PostgreSQL. 
-    - Editamos los campos "Host" con dbÑ5432, "Database" con science, "User" con super y colocamos la contraseña. En TLS/SSL Mode colocamos "disable". 
+    - Editamos los campos "Host" con db:5432, "Database" con science, "User" con super y colocamos la contraseña. En TLS/SSL Mode colocamos "disable". 
     - Guardamos y porbamos la conexión.
   - Creamos un nuevo dashboard:
     - En el menú lateral "Dashboard".
