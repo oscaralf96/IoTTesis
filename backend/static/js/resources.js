@@ -19,7 +19,7 @@ async function tables () {
         cells[1].innerHTML = response[i].specs;
         cells[1].setAttribute('class', 'table-boards-specs');
         //console.log(response[i]);
-        cells[2].src = window.location.host + response[i].image.slice(16);
+        cells[2].src =  "/" + response[i].image.split("/").slice(-4).join("/");
         cells[2].setAttribute('class', 'table-img');
         row.appendChild(cells[0]);
         row.appendChild(cells[1]);
