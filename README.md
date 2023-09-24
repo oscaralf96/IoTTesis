@@ -44,6 +44,9 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "user@email.com")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "password")
 EMAIL_PORT = 587
 ```
+
+No olvidar agregar estas varialbles de entorno al archivo .env.
+
 Si se utliziza una cuenta de Google, seguier las instrucciones en el siguiente enlace: [click.](https://support.google.com/accounts/answer/185833?hl=es-419)
 
 - Registrar usuario en la ruta "<host_IP>:8080/users/register/"
